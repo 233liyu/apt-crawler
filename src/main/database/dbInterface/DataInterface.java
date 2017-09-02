@@ -20,9 +20,9 @@ public interface DataInterface {
 
     public List<Data> getDataByTag(String tag);
 
-    public List<Data> getDataLimitBeforeDate(Date date, int limits);
+    public List<Data> getDataLimitBeforeDate(Date date, int limits);//时间之后
 
-    public List<Data> getDataAccordToDateOffset(int Start, int end);
+    public List<Data> getDataAccordToDateOffset(int Start, int end);//排序
 
     public List<Data> searchData(String keyWord);
 

@@ -3,6 +3,7 @@ package main.database.dbInterface;
 import main.Beans.Intel;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by lee on 2017/9/1.
@@ -12,11 +13,11 @@ import java.sql.Date;
  */
 public interface IntelDao {
 
-    public Intel findIntelByID();
+    public Intel findIntelByID(int ID);
 
-    public Intel findIntelBefore(Date date);
+    public List<Intel> findIntelBefore(Date date);
 
-    public Intel findIntelbetween(Date start_time, Date end_time);
+    public List<Intel> findIntelbetween(Date start_time, Date end_time);
 
 
 }
