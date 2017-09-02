@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import main.Beans.SystemUser;
 import main.database.dbInterface.UserDao;
-import main.database.fd;
+import main.database.databaseservece.Userseverce;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ public class UserLoginServlet extends javax.servlet.http.HttpServlet {
 
         try {
 
-            UserDao dao = new fd();
+            UserDao dao = new Userseverce();
             SystemUser user = dao.findUserByName("user_name");
             user_password.equals(user.getPassword());
             HttpSession session = request.getSession();

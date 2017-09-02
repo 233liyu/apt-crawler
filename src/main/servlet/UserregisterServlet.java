@@ -3,7 +3,7 @@ package main.servlet;
 import com.google.gson.JsonObject;
 import main.Beans.SystemUser;
 import main.database.dbInterface.UserDao;
-import main.database.fd;
+import main.database.databaseservece.Userseverce;
 import main.servlet.tool.apt_set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ public class UserregisterServlet extends  javax.servlet.http.HttpServlet {
 
         String signal = "success";
         try{
-            UserDao dao=new fd();
+            UserDao dao=new Userseverce();
             SystemUser user=dao.findUserByName(user_name);
             apt_set tmp=new apt_set();
             apt_set.setob(user,user_name,user_password,user_mail);
