@@ -42,7 +42,6 @@ public class Userseverce implements UserDao{
             sta=con.prepareStatement(sql);
             sta.setInt(1,Integer.parseInt(ID));
             res=sta.executeQuery();
-            res=sta.executeQuery(sql);
             List<SystemUser> list=finduser(res);
             systemUser=list.get(0);
             System.out.println("查询成功");
@@ -99,7 +98,7 @@ public class Userseverce implements UserDao{
             sta.setString(1,username);
             sta.setString(2,password);
             sta.setString(3,email);
-            sta.execute(sql);
+            sta.execute();
         }
         catch (Exception e){
             e.printStackTrace();

@@ -3,6 +3,7 @@ package main.database.dbInterface;
 import main.Beans.Data;
 import main.Beans.Tag;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,15 +17,15 @@ public interface DataInterface {
     // normal user and admin to get data
     // not crash to upper but pass empty
 
-    public Data getDataByID(String ID);
+    public Data getDataByID(String ID) throws SQLException;
 
-    public List<Data> getDataByTag(String tag);
+    public List<Data> getDataByTag(String tag) throws SQLException;
 
-    public List<Data> getDataLimitBeforeDate(Date date, int limits);//时间之后
+    public List<Data> getDataLimitBeforeDate(Date date, int limits) throws SQLException;//时间之后
 
-    public List<Data> getDataAccordToDateOffset(int Start, int end);//排序
+    public List<Data> getDataAccordToDateOffset(int Start, int end) throws SQLException;//排序
 
-    public List<Data> searchData(String keyWord);
+    public List<Data> searchData(String keyWord) throws SQLException;
 
     public List<Data> searchDataByTag(Tag tag, String keyWord);
 }
