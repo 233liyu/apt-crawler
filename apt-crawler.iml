@@ -19,6 +19,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.41" level="project" />
+    <orderEntry type="library" exported="" name="mysql:mysql-connector-java:5.1.41" level="project" />
+    <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 8.5.20" level="application_server_libraries" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>
