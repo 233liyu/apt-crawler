@@ -62,11 +62,17 @@
                 $.ajax({
                     type: "POST",
                     url:"/apt/user/login",
+                    contentType: 'application/json; charset=utf-8', // 很重要
                     dataType: "json",
-                    data:post,
-                    success: function () {
-                        console.log("success");
-                        window.location.href='http://www.baidu.com';
+                    data : post,
+                    success: function (daa) {
+                        if (daa.signal == 1){
+                            console.log("success");
+                            window.location.href='http://www.baidu.com';
+                        } else {
+                            alert("登陆成功！")
+
+                        }
                     },
                     error:function(){
                     }

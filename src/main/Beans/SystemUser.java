@@ -1,6 +1,8 @@
 package main.Beans;
 
 
+import main.servlet.tool.Encrypy;
+
 /**
  * Created by lee on 2017/9/1.
  *
@@ -20,8 +22,7 @@ public class SystemUser {
     }
 
     public boolean isPasswordMatch(String password){
-        // TODO: judge if the password in the data base is match
-        return true;
+        return this.Password.contentEquals(Encrypy.getMD5(password));
     }
 
 
