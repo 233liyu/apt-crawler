@@ -6,14 +6,12 @@
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script  src="/apt/JS/jquery-3.2.1.min.js"></script>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //Meta-Tags -->
     <!-- Style --> <link rel="stylesheet" href="../CSS/login.css" type="text/css" media="all">
-
+    <script src="../JS/jquery-3.2.1.min.js"></script>
 </head>
 <!-- //Head -->
-
 <!-- Body -->
 <body>
 <h1>  </h1>
@@ -34,14 +32,10 @@
     <div class="clear"></div>
 </div>
 
-<script>
+<script type="text/javascript">
     $("#LoginInformation").click(function(){
             var name=$("#Username").val();
             var password=$("#Password").val();
-            var information={
-                "user": name,
-                "password" : password
-            };
             var name_len=name.length;
             var psd_len=password.length;
             if(!(name_len>0)){
@@ -63,25 +57,32 @@
                 $("p").text("密码太长，请重新输入");
             }
             else{
-                $.ajax({
-                    type:"post",
-                    url:"user/login",
-                    data:{
-                        "information":JSON.stringify(information)
-                    },
-                    error : function(request) {
-                        alert("提交失败");
-                    },
-                    success : function(data) {
-                        console.log(data);
-                        if(data.successcode==1)
-                        {
-                            window.location.href='http://www.baidu.com';
-                        }
-                    }
-                })
+                var url="/apt/user/login";
+                var data={
+                    "username":name,"password":password
+                };
+                var post={data:JSON.stringify(data)};
+                $.post(url,data);
+            }
+        });
+    try {
+        $.ajax({
+            url:"/apt/user/login",
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                var json=eval(data);
+                var signal=json.signal;
+                if(signal==1)
+                {
+                    window.location.href='http://www.ddhbb.com';
+                }
+                else {
+                    alert("登陆失败");
+                }
             }
         })
+    }catch(e){}
 </script>
 
 </body>

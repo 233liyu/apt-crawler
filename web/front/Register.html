@@ -5,10 +5,10 @@
         <!-- Meta-Tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script  src="/apt/JS/jquery-3.2.1.min.js"></script>
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //Meta-Tags -->
         <!-- Style --> <link rel="stylesheet" href="../CSS/login.css" type="text/css" media="all">
+        <script src="../JS/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <h1>  </h1>
@@ -64,26 +64,45 @@
                 $("p").text("邮箱格式错误");
             }
             else{
-                $.ajax({
-                    type: "post",
-                    url: "user/register",
-                    data: {
-                        "information": JSON.stringify(information)
-                    },
-                    error: function (request) {
-                        alert("提交失败");
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        if(data.successcode==1)
-                        {
-                            window.location.href = 'http://www.baidu.com';
-                        }
+                var url="/apt/user/register";
+                var data={
+                    "username":name,"password":password,"email":email
+                };
+                var post={data:JSON.stringify(data)};
+//                $.post(url,data);
 
-                    }
-                })
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        username:name,
+                        password:password,
+                        email:email
+                    },
+                    success: function () {
+                        console.log("success");
+                    },
+                    dataType: "json"
+                });
             }
         })
+            try {
+                $.ajax({
+                    url: "/apt/user/register",
+                    type: "get",
+                    dataType: "application/json",
+                    success: function (data) {
+                        var json = eval(data);
+                        var signal = json.signal;
+                        if (signal == 1) {
+                            window.location.href = 'http://www.ddhbb.com';
+                        }
+                        else {
+                            alert("注册失败");
+                        }
+                    }
+                })
+                }catch(e){}
     </script>
 
 </body>
