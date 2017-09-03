@@ -31,8 +31,11 @@ public class Dataservece implements DataInterface {
             data.setURL(resultSet.getString("url"));
             data.setCrawlDate(resultSet.getDate("crawltime"));
         }
-
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Dataservece implements DataInterface {
         ResultSet res = null;
         Data data=new Data();
         PreparedStatement sta=null;
+        List<Data> list=new ArrayList<>();
         try {
             Connection con=null;
             con=connect.getConnection();
@@ -48,7 +52,7 @@ public class Dataservece implements DataInterface {
             sta=con.prepareStatement(sql);
             sta.setString(1,ID);
             res=sta.executeQuery();
-            List<Data> list=finddata(res);
+            list=finddata(res);
             data=list.get(0);
             System.out.println("查询成功");
         }
@@ -60,7 +64,11 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        return data;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list.get(0);
     }
 
     @Override
@@ -88,7 +96,11 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -118,7 +130,11 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -146,7 +162,11 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -172,7 +192,11 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
