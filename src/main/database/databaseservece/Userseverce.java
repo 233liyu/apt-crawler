@@ -68,7 +68,7 @@ public class Userseverce implements UserDao{
             String sql="select * from user_info where username = ?";
             sta=con.prepareStatement(sql);
             sta.setString(1,userName);
-            res=sta.executeQuery(sql);
+            res=sta.executeQuery();
             List<SystemUser> list=finduser(res);
             systemUser=list.get(0);
             System.out.println("查询成功");
@@ -123,7 +123,7 @@ public class Userseverce implements UserDao{
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="insert into user_info VALUES ('"+id+"','"+username+"',MD5("+password+"),'"+email+"','1')";
+            String sql="insert into user_info (username,password,email)VALUES ('"+username+"',MD5("+password+"),'"+email+"','1')";
             sta=con.prepareStatement(sql);
             sta.execute();
             System.out.println("查询成功");
