@@ -45,64 +45,47 @@
             if(!(name_len>0)){
                 $("p").text("用户名不能为空");
             }
-            else if(name_len<4){
-                $("p").text("用户名太短，请重新输入");
-            }
-            else if(name_len>10){
-                $("p").text("用户名太长，请重新输入");
+            else if(name_len<4||name_len>10){
+                $("p").text("请输入4-10位的用户名");
             }
             else if(!(psd_len>0)){
                 $("p").text("密码不能为空");
             }
-            else if(psd_len<6){
-                $("p").text("密码太短，请重新输入");
-            }
-            else if(psd_len>12) {
-                $("p").text("密码太长，请重新输入");
+            else if(psd_len<6||psd_len>12){
+                $("p").text("请输入6-12位的密码");
             }
             else if(!filter.test(email)) {
-                $("p").text("邮箱格式错误");
+                $("p").text("邮箱格式错误，标准格式为______@___.___");
             }
             else{
-                var url="/apt/user/register";
                 var data={
-                    "username":name,"password":password,"email":email
+                    "username":name,
+                    "password":password,
+                    "email":email
                 };
-                var post={data:JSON.stringify(data)};
-//                $.post(url,data);
-
+                var post=JSON.stringify(data);
                 $.ajax({
                     type: "POST",
-                    url: url,
-                    data: {
-                        username:name,
-                        password:password,
-                        email:email
+                    contentType: 'application/json; charset=utf-8', // 很重要
+                    url:"/apt/user/register",
+                    data:post,
+                    dataType: "json",
+                    success: function (dat) {
+                        if(dat.signal == 0){
+                            console.log(dat);
+                            alert("用户已存在，请重新输入");
+                        } else {
+                            console.log("success");
+
+                            window.location.href='/apt/front/Login.html';
+                        }
                     },
-                    success: function () {
-                        console.log("success");
-                    },
-                    dataType: "json"
+                    error:function(){
+
+                    }
                 });
             }
         })
-            try {
-                $.ajax({
-                    url: "/apt/user/register",
-                    type: "get",
-                    dataType: "application/json",
-                    success: function (data) {
-                        var json = eval(data);
-                        var signal = json.signal;
-                        if (signal == 1) {
-                            window.location.href = 'http://www.ddhbb.com';
-                        }
-                        else {
-                            alert("注册失败");
-                        }
-                    }
-                })
-                }catch(e){}
     </script>
 
 </body>

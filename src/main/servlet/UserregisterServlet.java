@@ -1,6 +1,7 @@
 package main.servlet;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import main.Beans.SystemUser;
 import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.UserDao;
@@ -9,7 +10,6 @@ import main.servlet.tool.apt_set;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
 
 
@@ -52,34 +52,69 @@ public class UserregisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         JsonObject receive =new JsonObject();
 
-        String user_name=request.getParameter("username");
-        String user_password=request.getParameter("password");
-        String user_mail=request.getParameter("mail");
-        System.out.println(user_name);
+        String user_name = null;
+        String user_password = null;
+        String user_mail = null;
+
+        String retString = "";
+
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+        Writer out = response.getWriter();
+
+        try{
+            String data = UserregisterServlet.getBody(request);
+
+            JsonParser parser = new JsonParser();
+            JsonObject object = (JsonObject) parser.parse(data);
+
+            user_name = object.get("username").getAsString();
+            user_password = object.get("password").getAsString();
+            user_mail = object.get("email").getAsString();
+
+        } catch (Exception e){
+            e.printStackTrace();
+
+            JsonObject object = new JsonObject();
+            object.addProperty("signal",0);
+
+            retString = object.toString();
+            out.write(retString);
+            out.flush();
+            response.flushBuffer();
+            return;
+        }
+
 
         int signal = 1;
         try{
             UserDao dao=new Userseverce();
             SystemUser user = new SystemUser();
-
             apt_set.setob(user,user_name,user_password,user_mail);
             dao.CreateUser(user);
-            HttpSession session = request.getSession();
-            session.setAttribute("user",user);
-        } catch (Exception e)
-        {
-            signal=0;
+//            TODO: jump to login
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user",user);
+        } catch (Exception e) {
+            JsonObject object = new JsonObject();
+            object.addProperty("signal",0);
             e.printStackTrace();
+
+            retString = object.toString();
+            out.write(retString);
+            out.flush();
+            response.flushBuffer();
+            return;
         }
+
         JsonObject object = new JsonObject();
-        object.addProperty("signal",signal);
-        Writer out = response.getWriter();
-        out.write(object.toString());
+        object.addProperty("signal",1);
+
+        retString = object.toString();
+        out.write(retString);
         out.flush();
         response.flushBuffer();
-
+        return;
 
     }
 

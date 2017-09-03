@@ -39,50 +39,40 @@
             var name_len=name.length;
             var psd_len=password.length;
             if(!(name_len>0)){
-                $("p").text("有户名不能为空");
+                $("p").text("用户名不能为空");
             }
-            else if(name_len<4){
-                $("p").text("用户名太短，请重新输入");
-            }
-            else if(name_len>10){
-                $("p").text("用户名太长，请重新输入");
+            else if(name_len<4||name_len>10){
+                $("p").text("请输入4-10位的用户名");
             }
             else if(!(psd_len>0)){
                 $("p").text("密码不能为空");
             }
-            else if(psd_len<6){
-                $("p").text("密码太短，请重新输入");
-            }
-            else if(psd_len>12) {
-                $("p").text("密码太长，请重新输入");
+            else if(psd_len<6||psd_len>12){
+                $("p").text("请输入6-12位的密码");
             }
             else{
-                var url="/apt/user/login";
+//                var url="/apt/user/login";
                 var data={
-                    "username":name,"password":password
+                    "username":name,
+                    "password":password
                 };
-                var post={data:JSON.stringify(data)};
-                $.post(url,data);
+                var post=JSON.stringify(data);
+//                var post={"data":JSON.stringify(data)};
+//                $.post(url,post);
+                $.ajax({
+                    type: "POST",
+                    url:"/apt/user/login",
+                    dataType: "json",
+                    data:post,
+                    success: function () {
+                        console.log("success");
+                        window.location.href='http://www.baidu.com';
+                    },
+                    error:function(){
+                    }
+                });
             }
         });
-    try {
-        $.ajax({
-            url:"/apt/user/login",
-            type:"get",
-            dataType:"json",
-            success:function (data) {
-                var json=eval(data);
-                var signal=json.signal;
-                if(signal==1)
-                {
-                    window.location.href='http://www.ddhbb.com';
-                }
-                else {
-                    alert("登陆失败");
-                }
-            }
-        })
-    }catch(e){}
 </script>
 
 </body>

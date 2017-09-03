@@ -13,10 +13,11 @@ import java.io.IOException;
 
 public class UserLoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
         String user_name = request.getParameter("username");
         String user_password=request.getParameter("userpassword");
-        System.out.println(user_name+"hahahahahahahah");
+        System.out.println(user_name+"       "+ request.getQueryString());
+        System.out.println(UserregisterServlet.getBody(request));
+        System.out.println();
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         int signal=1;
