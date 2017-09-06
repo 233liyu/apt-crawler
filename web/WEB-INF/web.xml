@@ -13,7 +13,34 @@
         <servlet-name>UserLoginServlet</servlet-name>
         <url-pattern>/user/login</url-pattern>
     </servlet-mapping>
-
+    
+    <servlet>
+        <servlet-name>MainpageServlet</servlet-name>
+        <servlet-class>main.servlet.MainpageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainpageServlet</servlet-name>
+        <url-pattern>/homepage/search</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>SearchByDateServlet</servlet-name>
+        <servlet-class>main.servlet.SearchByDateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchByDateServlet</servlet-name>
+        <url-pattern>/homepage/data</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DataModifyServlet</servlet-name>
+        <servlet-class>main.servlet.DataModifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataModifyServlet</servlet-name>
+        <url-pattern>/data/modify</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>UserregisterServlet</servlet-name>
         <servlet-class>main.servlet.UserregisterServlet</servlet-class>

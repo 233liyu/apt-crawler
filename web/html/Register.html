@@ -71,13 +71,12 @@
                     data:post,
                     dataType: "json",
                     success: function (dat) {
-                        if(dat.signal == 0){
+                        if(dat.signal == 1){
                             console.log(dat);
-                            alert("用户已存在，请重新输入");
+                            window.location.href='/apt/html/Login.html';
                         } else {
-                            console.log("success");
-
-                            window.location.href='/apt/front/Login.html';
+                            console.log("注册失败！");
+                            alert("用户名已存在，注册失败！");
                         }
                     },
                     error:function(){
