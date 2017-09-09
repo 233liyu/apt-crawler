@@ -33,6 +33,7 @@ public class Intelseverce implements IntelDao {
         ResultSet res = null;
         Intel intel = new Intel();
         PreparedStatement sta = null;
+        List<Intel> list = new ArrayList<>();
         try {
             Connection con = null;
             con = connect.getConnection();
@@ -40,7 +41,7 @@ public class Intelseverce implements IntelDao {
             sta = con.prepareStatement(sql);
             sta.setString(1, String.valueOf(ID));
             res = sta.executeQuery();
-            List<Intel> list = findintel(res);
+            list = findintel(res);
             intel = list.get(0);
             System.out.println("查询成功");
         } catch (Exception e) {
@@ -49,8 +50,12 @@ public class Intelseverce implements IntelDao {
         } finally {
             sta.close();
         }
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list.get(0);
 
-        return intel;
     }
 
     @Override
@@ -76,7 +81,11 @@ public class Intelseverce implements IntelDao {
         } finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -104,7 +113,11 @@ public class Intelseverce implements IntelDao {
             System.out.println("数据库操作失败");
         } finally {
             sta.close();
-            return list;
         }
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 }

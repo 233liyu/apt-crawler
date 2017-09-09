@@ -35,6 +35,7 @@ public class Userseverce implements UserDao{
         ResultSet res = null;
         SystemUser systemUser=new SystemUser();
         PreparedStatement sta = null;
+        List<SystemUser> list=new ArrayList<>();
         try {
             Connection con=null;
             con=connect.getConnection();
@@ -42,7 +43,7 @@ public class Userseverce implements UserDao{
             sta=con.prepareStatement(sql);
             sta.setInt(1,Integer.parseInt(ID));
             res=sta.executeQuery();
-            List<SystemUser> list=finduser(res);
+            list=finduser(res);
             systemUser=list.get(0);
             System.out.println("查询成功");
         }
@@ -53,7 +54,11 @@ public class Userseverce implements UserDao{
         } finally {
             sta.close();
         }
-        return systemUser;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list.get(0);
     }
 
     @Override
@@ -62,14 +67,15 @@ public class Userseverce implements UserDao{
         ResultSet res = null;
         SystemUser systemUser=new SystemUser();
         PreparedStatement sta=null;
+        List<SystemUser> list=new ArrayList<>();
         try {
             Connection con=null;
             con=connect.getConnection();
             String sql="select * from user_info where username = ?";
             sta=con.prepareStatement(sql);
             sta.setString(1,userName);
-            res=sta.executeQuery(sql);
-            List<SystemUser> list=finduser(res);
+            res=sta.executeQuery();
+            list=finduser(res);
             systemUser=list.get(0);
             System.out.println("查询成功");
         }
@@ -80,7 +86,11 @@ public class Userseverce implements UserDao{
         }finally {
             sta.close();
         }
-        return systemUser;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list.get(0);
     }
 
     @Override
@@ -123,7 +133,7 @@ public class Userseverce implements UserDao{
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="insert into user_info VALUES ('"+id+"','"+username+"',MD5("+password+"),'"+email+"','1')";
+            String sql="insert into user_info (username,password,email)VALUES ('"+username+"',MD5("+password+"),'"+email+"')";
             sta=con.prepareStatement(sql);
             sta.execute();
             System.out.println("查询成功");
@@ -196,7 +206,11 @@ public class Userseverce implements UserDao{
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 
     @Override
@@ -222,6 +236,10 @@ public class Userseverce implements UserDao{
         finally {
             sta.close();
         }
-        return list;
+        if(list.isEmpty())
+        {
+            return null;
+        }
+        else return list;
     }
 }

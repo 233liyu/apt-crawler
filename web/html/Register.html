@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>登录表单</title>
+        <title>注册</title>
         <!-- Meta-Tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <script  src="/apt/JS/jquery-3.2.1.min.js"></script>
         <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
         <!-- //Meta-Tags -->
         <!-- Style --> <link rel="stylesheet" href="../CSS/login.css" type="text/css" media="all">
+        <script src="../JS/jquery-3.2.1.min.js"></script>
 </head>
 <body>
     <h1>  </h1>
@@ -45,43 +45,44 @@
             if(!(name_len>0)){
                 $("p").text("用户名不能为空");
             }
-            else if(name_len<4){
-                $("p").text("用户名太短，请重新输入");
-            }
-            else if(name_len>10){
-                $("p").text("用户名太长，请重新输入");
+            else if(name_len<4||name_len>10){
+                $("p").text("请输入4-10位的用户名");
             }
             else if(!(psd_len>0)){
                 $("p").text("密码不能为空");
             }
-            else if(psd_len<6){
-                $("p").text("密码太短，请重新输入");
-            }
-            else if(psd_len>12) {
-                $("p").text("密码太长，请重新输入");
+            else if(psd_len<6||psd_len>12){
+                $("p").text("请输入6-12位的密码");
             }
             else if(!filter.test(email)) {
-                $("p").text("邮箱格式错误");
+                $("p").text("邮箱格式错误，标准格式为______@___.___");
             }
             else{
+                var data={
+                    "username":name,
+                    "password":password,
+                    "email":email
+                };
+                var post=JSON.stringify(data);
                 $.ajax({
-                    type: "post",
-                    url: "user/register",
-                    data: {
-                        "information": JSON.stringify(information)
-                    },
-                    error: function (request) {
-                        alert("提交失败");
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        if(data.successcode==1)
-                        {
-                            window.location.href = 'http://www.baidu.com';
+                    type: "POST",
+                    contentType: 'application/json; charset=utf-8', // 很重要
+                    url:"/apt/user/register",
+                    data:post,
+                    dataType: "json",
+                    success: function (dat) {
+                        if(dat.signal == 1){
+                            console.log(dat);
+                            window.location.href='/apt/html/Login.html';
+                        } else {
+                            console.log("注册失败！");
+                            alert("用户名已存在，注册失败！");
                         }
+                    },
+                    error:function(){
 
                     }
-                })
+                });
             }
         })
     </script>

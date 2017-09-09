@@ -2,18 +2,16 @@
 <html>
 <!-- Head -->
 <head>
-    <title>登录表单</title>
+        <title>登录</title>
     <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <script  src="/apt/JS/jquery-3.2.1.min.js"></script>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //Meta-Tags -->
     <!-- Style --> <link rel="stylesheet" href="../CSS/login.css" type="text/css" media="all">
-
+    <script src="../JS/jquery-3.2.1.min.js"></script>
 </head>
 <!-- //Head -->
-
 <!-- Body -->
 <body>
 <h1>  </h1>
@@ -34,54 +32,52 @@
     <div class="clear"></div>
 </div>
 
-<script>
+<script type="text/javascript">
     $("#LoginInformation").click(function(){
             var name=$("#Username").val();
             var password=$("#Password").val();
-            var information={
-                "user": name,
-                "password" : password
-            };
             var name_len=name.length;
             var psd_len=password.length;
             if(!(name_len>0)){
-                $("p").text("有户名不能为空");
+                $("p").text("用户名不能为空");
             }
-            else if(name_len<4){
-                $("p").text("用户名太短，请重新输入");
-            }
-            else if(name_len>10){
-                $("p").text("用户名太长，请重新输入");
+            else if(name_len<4||name_len>10){
+                $("p").text("请输入4-10位的用户名");
             }
             else if(!(psd_len>0)){
                 $("p").text("密码不能为空");
             }
-            else if(psd_len<6){
-                $("p").text("密码太短，请重新输入");
-            }
-            else if(psd_len>12) {
-                $("p").text("密码太长，请重新输入");
+            else if(psd_len<6||psd_len>12){
+                $("p").text("请输入6-12位的密码");
             }
             else{
+//                var url="/apt/user/login";
+                var data={
+                    "username":name,
+                    "password":password
+                };
+                var post=JSON.stringify(data);
+//                var post={"data":JSON.stringify(data)};
+//                $.post(url,post);
                 $.ajax({
-                    type:"post",
-                    url:"user/login",
-                    data:{
-                        "information":JSON.stringify(information)
-                    },
-                    error : function(request) {
-                        alert("提交失败");
-                    },
-                    success : function(data) {
-                        console.log(data);
-                        if(data.successcode==1)
-                        {
-                            window.location.href='http://www.baidu.com';
+                    type: "POST",
+                    url:"/apt/user/login",
+                    contentType: 'application/json; charset=utf-8', // 很重要
+                    dataType: "json",
+                    data : post,
+                    success: function (daa) {
+                        if (daa.signal == 1){
+                            console.log("success");
+                            window.location.href='/apt/html/HomePage.html';
+                        } else {
+                            alert("登录失败！");
                         }
+                    },
+                    error:function(){
                     }
-                })
+                });
             }
-        })
+        });
 </script>
 
 </body>
