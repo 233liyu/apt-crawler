@@ -1,6 +1,7 @@
 package main.database.databaseservece;
 
 import main.Beans.Data;
+import main.Beans.SystemUser;
 import main.Beans.Tag;
 import main.database.databaseconnect.Dataconnect;
 import main.database.dbInterface.DataInterface;
@@ -179,5 +180,33 @@ public class Dataservece implements DataInterface {
     public List<Data> searchDataByTag(Tag tag, String keyWord) {
 
         return null;
+    }
+
+    @Override
+    public List<Data> searchLike(SystemUser systemUser) throws SQLException {
+        Dataconnect connect=new Dataconnect();
+        ResultSet res = null;
+        String id=systemUser.getID();
+        PreparedStatement sta=null;
+        List<Data> list=new ArrayList<>();
+        try {
+            Connection con=null;
+            con=connect.getConnection();
+            String sql="select * from data_info where like_info.userid=? and data_info.id=like_info.dataid";
+            sta=con.prepareStatement(sql);
+            sta.setString(1,String.valueOf(id));
+            res=sta.executeQuery();
+            list=finddata(res);
+            System.out.println("查询成功");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("数据库操作失败");
+        }
+        finally {
+            sta.close();
+        }
+        return list;
     }
 }
