@@ -49,12 +49,12 @@
     //var data={"searchInfo":"todayInformation"};
     //var json=JSON.stringify(data);
     $.ajax({
-        type:"get",
-        url:"/apt/homepage/data",
+        type: "get",
+        url: "/apt/homepage/data",
         contentType: 'application/json; charset=utf-8', // 很重要
         dataType: "json",
         //data : json,
-        success:function(daa) {
+        success: function (daa) {
             var tr = $("#FormData");
             $.each(daa, function (index, item) {
                 var clonedTr = tr.clone();
@@ -147,66 +147,6 @@
     }
 </script>
 
-<script>
-    function Searchfunction(){
-        var searchInfo=$("#SearchInfo").val();
-        if(searchInfo.length==0){
-            alert("请输入查询信息！");
-        }
-        else{
-            var data={
-                "searchInfo":searchInfo
-            };
-            var json=JSON.stringify(data);
-            $.ajax({
-                url:"/apt/homepage/search_info",
-                type:"post",
-                contentType: 'application/json; charset=utf-8', // 很重要
-                dataType: "json",
-                data : json,
-                success:function(daa){
-                    alert("数据为",daa);
-                    var tr = $("#FormData");
-                    $.each(daa, function (index, item) {
-                        var clonedTr = tr.clone();
-                        var _index = index;
-                        clonedTr.children("td").each(function (inner_index) {
-                            switch (inner_index) {
-                                case(0):
-                                    $(this).html(_index + 1);
-                                    break;
-                                case(1):
-                                    $(this).html(item.title);
-                                    break;
-                                case(2):
-                                    $(this).html(item.author);
-                                    break;
-                                case(3):
-                                    $(this).html(item.time);
-                                    break;
-                                case(4):
-                                    $(this).html(item.summary);
-                                    break;
-                                case(5):
-                                    $(this).html(item.url);
-                                    break;
-                                case(6):
-                                    $(this).html(item.text);
-                                    break;
-                            }
-                        });
-                        clonedTr.insertAfter(tr);
-                    });
-                    tr.hide();
-                    $("#Table").show();
-                },
-                error:function(){
-                    alert("未搜索到相关信息");
-                }
-            })
-        }
-    }
-</script>
 <!---------------------------------------------------------------------------------->
 
 <div class="app-container">
@@ -244,8 +184,10 @@
                                     <h4 class="username">Emily Hart</h4>
                                     <p>emily_hart@email.com</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
-                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i> 我的信息</button>
-                                        <button type="button" class="btn btn-default" onclick="javascript:window.location.href='/apt/html/Login.html'">
+                                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i> 我的信息
+                                        </button>
+                                        <button type="button" class="btn btn-default"
+                                                onclick="javascript:window.location.href='/apt/html/Login.html'">
                                             <i class="fa fa-sign-out"></i> 退出登录
                                         </button>
                                     </div>
@@ -318,57 +260,6 @@
                                 </div>
                             </div>
                         </li>
-                        <!-- Dropdown-->
-                        <!--<li class="panel panel-default dropdown">-->
-                            <!--<a data-toggle="collapse" href="#component-example">-->
-                                <!--<span class="icon fa fa-cubes"></span><span class="title">Components</span>-->
-                            <!--</a>-->
-                            <!--&lt;!&ndash; Dropdown level 1 &ndash;&gt;-->
-                            <!--<div id="component-example" class="panel-collapse collapse">-->
-                                <!--<div class="panel-body">-->
-                                    <!--<ul class="nav navbar-nav">-->
-                                        <!--<li><a href="../html/haha.html">Pricing Table</a>-->
-                                        <!--</li>-->
-                                        <!--<li><a href="../html/haha.html">Chart.JS</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--&lt;!&ndash; Dropdown&ndash;&gt;-->
-                        <!--<li class="panel panel-default dropdown">-->
-                            <!--<a data-toggle="collapse" href="#dropdown-example">-->
-                                <!--<span class="icon fa fa-slack"></span><span class="title">Page Example</span>-->
-                            <!--</a>-->
-                            <!--&lt;!&ndash; Dropdown level 1 &ndash;&gt;-->
-                            <!--<div id="dropdown-example" class="panel-collapse collapse">-->
-                                <!--<div class="panel-body">-->
-                                    <!--<ul class="nav navbar-nav">-->
-                                        <!--<li><a href="../html/haha.html">Login</a>-->
-                                        <!--</li>-->
-                                        <!--<li><a href="../html/haha.html">Landing Page</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</li>-->
-                        <!--&lt;!&ndash; Dropdown&ndash;&gt;-->
-                        <!--<li class="panel panel-default dropdown">-->
-                            <!--<a data-toggle="collapse" href="#dropdown-icon">-->
-                                <!--<span class="icon fa fa-archive"></span><span class="title">Icons</span>-->
-                            <!--</a>-->
-                            <!--&lt;!&ndash; Dropdown level 1 &ndash;&gt;-->
-                            <!--<div id="dropdown-icon" class="panel-collapse collapse">-->
-                                <!--<div class="panel-body">-->
-                                    <!--<ul class="nav navbar-nav">-->
-                                        <!--<li><a href="../html/haha.html">Glyphicons</a>-->
-                                        <!--</li>-->
-                                        <!--<li><a href="../html/haha.html">Font Awesomes</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</li>-->
 
                         <li>
                             <a href="../html/haha.html">
@@ -383,11 +274,11 @@
         <!-- Main Content -->
         <div id="MainContent" class="mainContent">
             <div id="InfoSearch" class="infoSearch">
-                    <input id="SearchInfo" type="search" placeholder="Search here..." required>
-                    <button id="Search" type="submit" onclick="Searchfunction()">Search</button>
+                <input id="SearchInfo" type="search" placeholder="Search here..." required>
+                <button id="Search" type="submit" >Search</button>
             </div>
-            <div id="InfoForm" class="infoForm" >
-                <table id="Table" style="width: 100%" >
+            <div id="InfoForm" class="infoForm">
+                <table id="Table" style="width: 100%">
                     <tr id="FormHead" class="formHead">
                         <!--<th style="width: 5%">
                             <input type="checkbox" name="checkbox" />
@@ -403,18 +294,69 @@
                         <!--<td  style="width: 5%">
                             <input type="checkbox" name="checkbox" />
                         </td>-->
-                        <td  style="width: 12%"></td>
-                        <td  style="width: 12%"></td>
-                        <td  style="width: 12%"></td>
-                        <td  style="width: 12%"></td>
-                        <td  style="width: 12%"></td>
-                        <td  style="width: 35%"></td>
+                        <td style="width: 12%"></td>
+                        <td style="width: 12%"></td>
+                        <td style="width: 12%"></td>
+                        <td style="width: 12%"></td>
+                        <td style="width: 12%"></td>
+                        <td style="width: 35%"></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    $("#Search").click(
+        function () {
+//            alert("值为: " + $("#SearchInfo").val());
+            var searchInfo = $("#SearchInfo").val();
+            if (searchInfo.length == 0) {
+                alert("请输入查询信息！");
+            }
+            else {
+                var data = {
+                    "demand": searchInfo
+                };
+                var json = JSON.stringify(data);
+                $.ajax({
+                    url: "/apt/homepage/search_info",
+                    type: "post",
+                    contentType: 'application/json; charset=utf-8', // 很重要
+                    dataType: "json",
+                    data: json,
+                    success: function (daa) {
+                        $("tr").remove(".formData");
+                        console.log("数据为",daa);
+                        var arr = daa.jsonarray;
+                        console.log(arr);
+                        for (var i = 0; i < arr.length; i++) {
+                            $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
+                                "                        <!--<td  style=\"width: 5%\">\n" +
+                                "                        <input type=\"checkbox\" name=\"checkbox\" />\n" +
+                                "                        </td>-->\n" +
+                                "                        <td  style=\"width: 12%\">"+ arr[i].Title +"</td>\n" +
+                                "                        <td  style=\"width: 12%\">"+ arr[i].Arrthor+"</td>\n" +
+                                "                        <td  style=\"width: 12%\">"+ arr[i].PublshTime+"</td>\n" +
+                                "                        <td  style=\"width: 12%\">"+ arr[i].Content+"</td>\n" +
+                                "                        <td  style=\"width: 12%\">"+ arr[i].URL+"</td>\n" +
+                                "                        <td  style=\"width: 35%\">"+arr[i].Sites+"</td>\n" +
+                                "                        </tr>"
+                            )
+                        }
+
+                    },
+                    error: function () {
+                        alert("未搜索到相关信息");
+                    }
+                })
+            }
+        }
+    )
+</script>
+
 </body>
 
 

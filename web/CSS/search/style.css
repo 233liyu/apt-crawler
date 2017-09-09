@@ -2,7 +2,7 @@ body {background:url("../../img/hero.jpg") no-repeat center center fixed; backgr
 
 .infoSearch {width: 50%;height: 40px;margin:0 25% ;background: #444;background: rgba(0,0,0,.2);border-radius:  10px;border: 1px solid #fff;}
 
-.infoSearch input {width: 77.5%;padding: 10px 5px;float:left;color: #ccc;border: 0;background: transparent;border-radius: 3px 0 0 3px;}
+.infoSearch input {width: 75%;padding: 10px 5px;float:left;color: #ccc;border: 0;background: transparent;border-radius: 3px 0 0 3px;}
 
 .infoSearch input:focus {outline: 0;background:transparent;}
 
