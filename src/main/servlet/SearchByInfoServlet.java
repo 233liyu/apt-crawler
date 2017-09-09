@@ -63,6 +63,10 @@ public class SearchByInfoServlet extends HttpServlet {
                 object1.addProperty("SourceIntelID", ob.getSourceIntelID());
                 object1.addProperty("Title", ob.getTitle());
                 object1.addProperty("URL", ob.getURL());
+                String PublishDate =ob.getPublishDate().toString();
+                String CrawlDate =ob.getCrawlDate().toString();
+                object1.addProperty("PublishDate",PublishDate);
+                object1.addProperty("CrawlDate",CrawlDate);
                 array.add(object1);
                 i++;
             }
