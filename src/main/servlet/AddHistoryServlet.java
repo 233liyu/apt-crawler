@@ -9,6 +9,7 @@ import main.database.dbInterface.DataHistory;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.UserDao;
 import main.servlet.UserregisterServlet;
+import main.database.databaseservece.DataHistoryseverce;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,7 +51,7 @@ public  class AddHistoryServlet extends HttpServlet {
             return;
         }
         try{
-            DataHistory History =new DataHistoryservece();
+            DataHistory History =new DataHistoryseverce();
             History.AddHistory(user,DataID);
         }catch (Exception e)
         {

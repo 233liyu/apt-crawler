@@ -9,7 +9,7 @@ import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataHistory;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.UserDao;
-
+import main.database.databaseservece.DataHistoryseverce;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +51,7 @@ public class DeleteHistoryServlet extends HttpServlet {
         {
             try{
                 user =dao1.findUserByID(UserID);
-                DataHistory history =new DataHistoryservece();
+                DataHistory history =new DataHistoryseverce();
                 history.DeleteAllHistory(user);
             }catch (Exception e)
             {
@@ -73,7 +73,7 @@ public class DeleteHistoryServlet extends HttpServlet {
         {
             try{
                 user =dao1.findUserByID(UserID);
-                DataHistory history =new DataHistoryservece();
+                DataHistory history =new DataHistoryseverce();
                 history.DeleteSingleHistory(user,DataID);
             }catch (Exception e)
             {

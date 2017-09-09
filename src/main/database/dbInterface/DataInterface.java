@@ -31,4 +31,7 @@ public interface DataInterface {
     public List<Data> searchDataByTag(Tag tag, String keyWord);
 
     public List<Data> searchLike(SystemUser systemUser) throws SQLException;
+
+    public  void addLike(SystemUser systemUser,String dataID);
+    public  void deleteLike(SystemUser systemUser,String dataID);
 }
