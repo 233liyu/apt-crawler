@@ -1,6 +1,7 @@
 package main.database.dbInterface;
 
 import main.Beans.Data;
+import main.Beans.SystemUser;
 import main.Beans.Tag;
 
 import java.sql.SQLException;
@@ -28,4 +29,6 @@ public interface DataInterface {
     public List<Data> searchData(String keyWord) throws SQLException;
 
     public List<Data> searchDataByTag(Tag tag, String keyWord);
+
+    public List<Data> searchLike(SystemUser systemUser) throws SQLException;
 }

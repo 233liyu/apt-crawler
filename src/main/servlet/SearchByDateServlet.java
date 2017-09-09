@@ -36,14 +36,18 @@ public class SearchByDateServlet extends HttpServlet {
             JsonArray array  = new JsonArray();
             for (Data ob : a){
                 JsonObject object1 = new JsonObject();
-                object.addProperty("no", i);
-                object.addProperty("ID", ob.getDataID());
-                object.addProperty("Author", ob.getAuthor());
-                object.addProperty("Content", ob.getContent());
-                object.addProperty("Sites", ob.getSites());
-                object.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object.addProperty("Title", ob.getTitle());
-                object.addProperty("URL", ob.getURL());
+                object1.addProperty("no", i);
+                object1.addProperty("ID", ob.getDataID());
+                object1.addProperty("Author", ob.getAuthor());
+                object1.addProperty("Content", ob.getContent());
+                object1.addProperty("Sites", ob.getSites());
+                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
+                object1.addProperty("Title", ob.getTitle());
+                object1.addProperty("URL", ob.getURL());
+                String PublishDate =ob.getPublishDate().toString();
+                String CrawlDate =ob.getCrawlDate().toString();
+                object1.addProperty("PublishDate",PublishDate);
+                object1.addProperty("CrawlDate",CrawlDate);
                 array.add(object1);
                 i++;
             }
