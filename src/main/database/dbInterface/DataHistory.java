@@ -10,8 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 public interface DataHistory {
-    public void AddHistory(SystemUser user,String dataID);
+    public void AddHistory(SystemUser user,String dataID) throws Exception;
     public List<Data> GetHistory(SystemUser user) throws SQLException;
-    public void DeleteAllHistory(SystemUser user) throws  SQLException;
-    public void DeleteSingleHistory(SystemUser user,String dataID)throws  SQLException;
+    public void DeleteAllHistory(SystemUser user) throws Exception;
+    public void DeleteSingleHistory(SystemUser user,String dataID) throws Exception;
 }
