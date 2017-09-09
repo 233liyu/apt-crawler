@@ -42,14 +42,22 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>MainpageServlet</servlet-name>
-        <servlet-class>main.servlet.MainpageServlet</servlet-class>
+        <servlet-name>UserCollectionServlet</servlet-name>
+        <servlet-class>main.servlet.UserCollectionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MainpageServlet</servlet-name>
-        <url-pattern>/mainpage</url-pattern>
+        <servlet-name>UserCollectionServlet</servlet-name>
+        <url-pattern>/homepage/usercollection</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <servlet-class>main.servlet.UserLogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <url-pattern>/user/logout</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>UserregisterServlet</servlet-name>
         <servlet-class>main.servlet.UserregisterServlet</servlet-class>
