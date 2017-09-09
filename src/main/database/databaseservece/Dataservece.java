@@ -30,12 +30,9 @@ public class Dataservece implements DataInterface {
             data.setTitle(resultSet.getString("title"));
             data.setURL(resultSet.getString("url"));
             data.setCrawlDate(resultSet.getDate("crawltime"));
+            list.add(data);
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override

@@ -15,12 +15,12 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>MainpageServlet</servlet-name>
-        <servlet-class>main.servlet.MainpageServlet</servlet-class>
+        <servlet-name>SearchByInfoServlet</servlet-name>
+        <servlet-class>main.servlet.SearchByInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MainpageServlet</servlet-name>
-        <url-pattern>/homepage/search</url-pattern>
+        <servlet-name>SearchByInfoServlet</servlet-name>
+        <url-pattern>/homepage/search_info</url-pattern>
     </servlet-mapping>
     
     <servlet>
