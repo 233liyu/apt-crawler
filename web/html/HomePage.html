@@ -36,116 +36,12 @@
     <script type="text/javascript" src="../lib/js/ace/mode-html.js"></script>
     <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
     <!-- Javascript -->
-    <script type="text/javascript" src="../JS/app.js"></script>
-    <script type="text/javascript" src="../JS/index.js"></script>
 
 </head>
 
 <body class="flat-blue">
 
 <!---------------------------------------------------------------------------------->
-<!--初始界面查询信息 -->
-<script type="text/javascript">
-    //var data={"searchInfo":"todayInformation"};
-    //var json=JSON.stringify(data);
-    $.ajax({
-        type: "get",
-        url: "/apt/homepage/data",
-        contentType: 'application/json; charset=utf-8', // 很重要
-        dataType: "json",
-        //data : json,
-        success: function (daa) {
-            var tr = $("#FormData");
-            $.each(daa, function (index, item) {
-                var clonedTr = tr.clone();
-                var _index = index;
-                clonedTr.children("td").each(function (inner_index) {
-                    switch (inner_index) {
-//                            case(0):
-//                                $(this).html(_index );
-//                                break;
-                        case(0):
-                            $(this).html(item.title);
-                            break;
-                        case(1):
-                            $(this).html(item.author);
-                            break;
-                        case(2):
-                            $(this).html(item.time);
-                            break;
-                        case(3):
-                            $(this).html(item.summary);
-                            break;
-                        case(4):
-                            $(this).html(item.url);
-                            break;
-                        case(5):
-                            $(this).html(item.text);
-                            break;
-                    }
-                });
-                clonedTr.insertAfter(tr);
-            });
-            tr.hide();
-            $("#Table").show();
-        }
-    })
-</script>
-
-<!--搜索-->
-<script type="text/javascript">
-
-</script>
-
-<!--APT 漏洞 攻击 黑客 风险 威胁 安全 其他 信息查询-->
-<script type="text/javascript">
-    function function1() {
-        var searchKey = "APT";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function2() {
-        var searchKey = "漏洞";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function3() {
-        var searchKey = "攻击";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function4() {
-        var searchKey = "黑客";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function5() {
-        var searchKey = "风险";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function6() {
-        var searchKey = "威胁";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function7() {
-        var searchKey = "安全";
-        searchFunction(searchKey)
-    }
-</script>
-<script type="text/javascript">
-    function function8() {
-        var searchKey = "其他";
-        searchFunction(searchKey)
-    }
-</script>
 
 <!---------------------------------------------------------------------------------->
 
@@ -186,7 +82,7 @@
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default"><i class="fa fa-user"></i> 我的信息
                                         </button>
-                                        <button type="button" class="btn btn-default"
+                                        <button id="Logout" type="button" class="btn btn-default"
                                                 onclick="javascript:window.location.href='/apt/html/Login.html'">
                                             <i class="fa fa-sign-out"></i> 退出登录
                                         </button>
@@ -356,6 +252,105 @@
         }
     )
 </script>
+
+<!--初始界面查询信息 -->
+<script type="text/javascript">
+    var data={"searchInfo":"todayInformation"};
+    var json=JSON.stringify(data);
+    $.ajax({
+        type: "get",
+        url: "/apt/homepage/data",
+        contentType: 'application/json; charset=utf-8', // 很重要
+        dataType: "demand",
+        data : json,
+        success: function (daa) {
+            var tr = $("#FormData");
+            $.each(daa, function (index, item) {
+                var clonedTr = tr.clone();
+                var _index = index;
+                clonedTr.children("td").each(function (inner_index) {
+                    switch (inner_index) {
+//                            case(0):
+//                                $(this).html(_index );
+//                                break;
+                        case(0):
+                            $(this).html(item.title);
+                            break;
+                        case(1):
+                            $(this).html(item.author);
+                            break;
+                        case(2):
+                            $(this).html(item.time);
+                            break;
+                        case(3):
+                            $(this).html(item.summary);
+                            break;
+                        case(4):
+                            $(this).html(item.url);
+                            break;
+                        case(5):
+                            $(this).html(item.text);
+                            break;
+                    }
+                });
+                clonedTr.insertAfter(tr);
+            });
+            tr.hide();
+            $("#Table").show();
+        }
+    })
+</script>
+<!--搜索-->
+<!--APT 漏洞 攻击 黑客 风险 威胁 安全 其他 信息查询-->
+<script type="text/javascript">
+    function function1() {
+        var searchKey = "APT";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function2() {
+        var searchKey = "漏洞";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function3() {
+        var searchKey = "攻击";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function4() {
+        var searchKey = "黑客";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function5() {
+        var searchKey = "风险";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function6() {
+        var searchKey = "威胁";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function7() {
+        var searchKey = "安全";
+        searchFunction(searchKey)
+    }
+</script>
+<script type="text/javascript">
+    function function8() {
+        var searchKey = "其他";
+        searchFunction(searchKey)
+    }
+</script>
+
 
 </body>
 
