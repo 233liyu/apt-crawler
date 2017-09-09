@@ -42,6 +42,15 @@
     </servlet-mapping>
     
     <servlet>
+        <servlet-name>MainpageServlet</servlet-name>
+        <servlet-class>main.servlet.MainpageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainpageServlet</servlet-name>
+        <url-pattern>/mainpage</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>UserregisterServlet</servlet-name>
         <servlet-class>main.servlet.UserregisterServlet</servlet-class>
     </servlet>

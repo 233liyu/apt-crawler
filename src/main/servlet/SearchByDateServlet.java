@@ -34,20 +34,20 @@ public class SearchByDateServlet extends HttpServlet {
             Data arr[] =a.toArray(new Data[a.size()]);
             int i = 0;
             JsonArray array  = new JsonArray();
-            while (arr[i].getDataID() != null) {
+            for (Data ob : a){
                 JsonObject object1 = new JsonObject();
-                object1.addProperty("no", i);
-                object1.addProperty("ID", arr[i].getDataID());
-                object1.addProperty("Author", arr[i].getAuthor());
-                object1.addProperty("Content", arr[i].getContent());
-                object1.addProperty("Sites", arr[i].getSites());
-                object1.addProperty("SourceIntelID", arr[i].getSourceIntelID());
-                object1.addProperty("Title", arr[i].getTitle());
-                object1.addProperty("URL", arr[i].getURL());
+                object.addProperty("no", i);
+                object.addProperty("ID", ob.getDataID());
+                object.addProperty("Author", ob.getAuthor());
+                object.addProperty("Content", ob.getContent());
+                object.addProperty("Sites", ob.getSites());
+                object.addProperty("SourceIntelID", ob.getSourceIntelID());
+                object.addProperty("Title", ob.getTitle());
+                object.addProperty("URL", ob.getURL());
                 array.add(object1);
                 i++;
-                
             }
+            object.add("jsonarray",array);
         }catch(Exception e)
         {
             object.addProperty("signal","Output Fail");
@@ -58,6 +58,7 @@ public class SearchByDateServlet extends HttpServlet {
             return;
         }
         object.addProperty("signal","Output Success");
+
         retString = object.toString();
         out.write(retString);
         out.flush();
