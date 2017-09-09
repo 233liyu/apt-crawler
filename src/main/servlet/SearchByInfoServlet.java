@@ -1,5 +1,6 @@
 package main.servlet;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import main.Beans.Data;
@@ -51,28 +52,21 @@ public class SearchByInfoServlet extends HttpServlet {
             }
             int i = 0;
             object.addProperty("signal", "Demand success");
+            JsonArray array =new JsonArray();
             for (Data ob : a){
-                object.addProperty("no", i);
-                object.addProperty("ID", ob.getDataID());
-                object.addProperty("Author", ob.getAuthor());
-                object.addProperty("Content", ob.getContent());
-                object.addProperty("Sites", ob.getSites());
-                object.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object.addProperty("Title", ob.getTitle());
-                object.addProperty("URL", ob.getURL());
+                JsonObject object1 =new JsonObject();
+                object1.addProperty("no", i);
+                object1.addProperty("ID", ob.getDataID());
+                object1.addProperty("Author", ob.getAuthor());
+                object1.addProperty("Content", ob.getContent());
+                object1.addProperty("Sites", ob.getSites());
+                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
+                object1.addProperty("Title", ob.getTitle());
+                object1.addProperty("URL", ob.getURL());
+                array.add(object1);
                 i++;
             }
-//            while (arr[i].getDataID() != null) {
-//                object.addProperty("no", i);
-//                object.addProperty("ID", arr[i].getDataID());
-//                object.addProperty("Author", arr[i].getAuthor());
-//                object.addProperty("Content", arr[i].getContent());
-//                object.addProperty("Sites", arr[i].getSites());
-//                object.addProperty("SourceIntelID", arr[i].getSourceIntelID());
-//                object.addProperty("Title", arr[i].getTitle());
-//                object.addProperty("URL", arr[i].getURL());
-//                i++;
-//            }
+            object.add("jsonarray",array);
         } catch (Exception e) {
             object.addProperty("signal", "Demand Fail");
             e.printStackTrace();

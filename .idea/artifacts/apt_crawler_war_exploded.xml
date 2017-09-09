@@ -1,15 +1,16 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="apt-crawler:war exploded">
-    <output-path>F:/apache-tomcat-7.0.57/webapps/apt-crawler</output-path>
+  <artifact type="exploded-war" name="apt-crawler:war exploded">
+    <output-path>F:/apache-tomcat-7.0.57/webapps/apt</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="apt-crawler" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="gson-2.8.0" />
+          <element id="library" level="project" name="lib" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="apt-crawler/web/Web2" />
       <element id="javaee-facet-resources" facet="apt-crawler/web/Web" />
     </root>
   </artifact>
