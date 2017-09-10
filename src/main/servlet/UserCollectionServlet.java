@@ -36,8 +36,7 @@ public class UserCollectionServlet extends HttpServlet {
             String data = UserregisterServlet.getBody(request);
             JsonParser parser = new JsonParser();
             object = (JsonObject) parser.parse(data);
-            UserID = object.get("UserID").getAsString();
-            user = dao1.findUserByID(UserID);
+            user = (SystemUser)request.getSession().getAttribute("user");
         }catch (Exception e) {
             object.addProperty("signal","Search User Fail");
             retString=object.toString();
