@@ -31,18 +31,29 @@ public class UserInformationServlet extends HttpServlet {
               user_email=user.getEmail();
          }catch (Exception e)
          {
-             object.addProperty("signal", "Session not find");
+             object.addProperty("signal", "Session Not Find");
              retString=object.toString();
              out.write(retString);
              out.flush();
              response.flushBuffer();
              return;
          }
-         object.addProperty("username",user_name);
-         object.addProperty("userpassword",user_passwordd);
-         object.addProperty("userID",user_ID);
-         object.addProperty("userpower",user_power);
-         object.addProperty("useremail",user_email);
+         try {
+             object.addProperty("username", user_name);
+             object.addProperty("userpassword", user_passwordd);
+             object.addProperty("userID", user_ID);
+             object.addProperty("userpower", user_power);
+             object.addProperty("useremail", user_email);
+         }catch (Exception e)
+         {
+             object.addProperty("signal", "User Informartion Fail");
+             retString=object.toString();
+             out.write(retString);
+             out.flush();
+             response.flushBuffer();
+             return;
+         }
+        object.addProperty("signal", "User Informartion Success");
         retString=object.toString();
         out.write(retString);
         out.flush();
