@@ -230,4 +230,58 @@ public class Dataservece implements DataInterface {
         }
         return list;
     }
+
+    @Override
+    public void addLike(SystemUser systemUser, String DataID) throws Exception {
+        String s="ok";
+        Dataconnect connect=new Dataconnect();
+        String userid=systemUser.getID();
+        PreparedStatement sta=null;
+        try {
+            Connection con=null;
+            con=connect.getConnection();
+            String sql="insert into  like_info set userid = ? ,dataid = ?,time=TIMESTAMP(now()); ";
+            sta=con.prepareStatement(sql);
+            sta.setString(1,userid);
+            sta.setString(2,DataID);
+            sta.execute();
+            System.out.println("查询成功");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("数据库操作失败");
+            throw new Exception("插入失败");
+        }
+        finally {
+            sta.close();
+        }
+    }
+
+    @Override
+    public void deleteLike(SystemUser systemUser, String DataID) throws Exception {
+        Dataconnect connect=new Dataconnect();
+        ResultSet res = null;
+        String userID=systemUser.getID();
+        PreparedStatement sta=null;
+        try {
+            Connection con=null;
+            con=connect.getConnection();
+            String sql="delete  from like_info where history_info.userid = ? and history_info.dataid=?";
+            sta=con.prepareStatement(sql);
+            sta.setString(1,userID);
+            sta.setString(2,DataID);
+            sta.execute();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("数据库操作失败");
+            throw new Exception("123");
+        }
+        finally {
+            sta.close();
+        }
+
+    }
 }
