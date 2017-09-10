@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,8 +25,13 @@ public class SearchByDateServlet extends HttpServlet {
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
         try{
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.add(Calendar.DATE, -3);
+            System.out.println(cal.getTime());
+
             DataInterface dao = new Dataservece();
-            List<Data> a = dao.getDataLimitBeforeDate(now,10);
+            List<Data> a = dao.getDataLimitBeforeDate(cal.getTime(),10);
             int i = 0;
             JsonArray array  = new JsonArray();
             for (Data ob : a){

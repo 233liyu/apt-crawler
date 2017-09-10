@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class MovingManager {
 
-    public Long lastMoveDate;
+    public static Long lastMoveDate;
     private AntThread antThread;
 
     private static MovingManager ourInstance = new MovingManager();

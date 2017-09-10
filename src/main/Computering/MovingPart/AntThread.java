@@ -59,7 +59,7 @@ public class AntThread extends Thread{
 
 
             try {
-                sleep(12000);
+                sleep(200000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 break;
