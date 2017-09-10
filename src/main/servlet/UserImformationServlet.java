@@ -38,11 +38,11 @@ public class UserImformationServlet extends HttpServlet {
              response.flushBuffer();
              return;
          }
-         object.addProperty("username",user_name);
-         object.addProperty("userpassword",user_passwordd);
-         object.addProperty("userID",user_ID);
-         object.addProperty("userpower",user_power);
-         object.addProperty("useremail",user_email);
+         object.addProperty("UserName",user_name);
+         object.addProperty("UserNassword",user_passwordd);
+         object.addProperty("UserID",user_ID);
+         object.addProperty("UserPower",user_power);
+         object.addProperty("UserPmail",user_email);
         retString=object.toString();
         out.write(retString);
         out.flush();

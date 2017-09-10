@@ -73,6 +73,7 @@
                     success: function (dat) {
                         if(dat.signal == 1){
                             console.log(dat);
+                            alert("注册成功！");
                             window.location.href='/apt/html/Login.html';
                         } else {
                             console.log("注册失败！");

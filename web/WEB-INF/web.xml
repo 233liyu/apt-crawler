@@ -19,7 +19,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserImformationServlet</servlet-name>
-        <url-pattern>/user/imformation</url-pattern>
+        <url-pattern>/user/information</url-pattern>
     </servlet-mapping>
 
     <servlet>
