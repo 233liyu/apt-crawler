@@ -84,7 +84,6 @@ function searchFunction(searchInfo){
 //点击查看后显示信息-------------------------------------------------
 function formDataView(obj){
     var searchInfo=obj.id;
-    alert(searchInfo);
     var data={"dataId":searchInfo};
     var json=JSON.stringify(data);
     $.ajax({
@@ -137,29 +136,38 @@ function collection(){
         dataType: "json",
         data : json,
         success: function (daa) {
-            $("tr").remove(".formData");
-            console.log("数据为",daa);
-            var arr = daa.array;
-            console.log(arr);
-            for (var i = 0; i < arr.length; i++) {
-                $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                    "                            <td style=\"width: 20%\">+arr[i].Title+</td>\n" +
-                    "                            <td style=\"width: 10%\">+arr[i].Tag+</td>\n" +
-                    "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\"+arr[i].Title+\" onclick=\"formDataView(this)\">查看</a>\n" +
-                    "                            </td>\n" +
-                    "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\"+arr[i].Title+\" onclick=\"collectionCancel(this)\">取消收藏</a>\n" +
-                    "                            </td>\n" +
-                    "                        </tr>"
-                )
+            if(daa.signal=="SearchLike Success") {
+                alert("查询成功");
+                var arr = daa.jsonarray;
+                if (arr.length > 0){
+                    $("tr").remove(".formData");
+                for (var i = 0; i < arr.length; i++) {
+                    $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
+                        "                            <td style=\"width: 20%\">" + arr[i].Title + "</td>\n" +
+                        "                            <td style=\"width: 10%\">" + arr[i].Tag + "</td>\n" +
+                        "                            <td style=\"width: 5%\">\n" +
+                        "                                <a id=\"+arr[i].ID+\" onclick=\"formDataView(this)\">查看</a>\n" +
+                        "                            </td>\n" +
+                        "                            <td style=\"width: 5%\">\n" +
+                        "                                <a id=\"+arr[i].ID+\" onclick=\"collectionCancel(this)\">取消收藏</a>\n" +
+                        "                            </td>\n" +
+                        "                        </tr>"
+                    )
+                }
+                $("#NowTitle").text(arr[0].TiTle);
+                $("#NowAuthor").text("作者：" + arr[0].Author);
+                $("#NowPublishTime").text("发布时间：" + arr[0].PulishDate);
+                $("#NowTag").text("标签：" + arr[0].Tag);
+                $("#NowUrl").text("网址：" + arr[0].URL);
+                $("#NowContent").text(arr[0].Content)
+            }else{
+                    alert("暂无收藏")
+                }
+            }else if(daa.signal=="SearchLike Fail"){
+                alert("未查到收藏信息");
+            }else if(daa.signal=="Search User Fail"){
+                alert("无用户")
             }
-            $("#NowTitle").text(arr[0].TiTle);
-            $("#NowAuthor").text("作者："+arr[0].Author);
-            $("#NowPublishTime").text("发布时间："+arr[0].PulishTime);
-            $("#NowTag").text("标签："+arr[0].Tag);
-            $("#NowUrl").text("网址："+arr[0].Url);
-            $("#NowContent").text(arr[0].Content)
         },
         error: function () {
             alert("未搜索到相关信息");
@@ -308,26 +316,25 @@ $("#Search").click(
             success: function (daa) {
                 $("tr").remove(".formData");
                 console.log("数据为", daa);
-                var arr = daa.array;
-                console.log(arr);
+                var arr = daa.jsonarray;
                 for (var i = 0; i < arr.length; i++) {
                     $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
                         "                            <td style=\"width: 20%\">+arr[i].Title+</td>\n" +
                         "                            <td style=\"width: 10%\">+arr[i].Tag+</td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].Title+\" onclick=\"formDataView(this)\">查看</a>\n" +
+                        "                                <a id=\"+arr[i].ID+\" onclick=\"formDataView(this)\">查看</a>\n" +
                         "                            </td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].Title+\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
+                        "                                <a id=\"+arr[i].ID+\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
                         "                            </td>\n" +
                         "                        </tr>"
                     )
                 }
                 $("#NowTitle").text(arr[0].Title);
                 $("#NowAuthor").text("作者："+arr[0].Author);
-                $("#NowPublishTime").text("发布时间："+arr[0].PulishTime);
+                $("#NowPublishTime").text("发布时间："+arr[0].PulishDate);
                 $("#NowTag").text("标签："+arr[0].Tag);
-                $("#NowUrl").text("网址："+arr[0].Url);
+                $("#NowUrl").text("网址："+arr[0].URL);
                 $("#NowContent").text(arr[0].Content)
             },
             error: function () {

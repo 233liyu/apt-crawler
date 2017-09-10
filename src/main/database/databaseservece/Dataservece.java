@@ -14,6 +14,8 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Dataservece implements DataInterface {
 
@@ -182,17 +184,26 @@ public class Dataservece implements DataInterface {
         return list;
     }
 
+
+    public List search(String name,List <Data>list){
+        List results = new ArrayList();
+        Pattern pattern = Pattern.compile(name);
+        for(int i=0; i < list.size(); i++){
+            Matcher matcher = pattern.matcher((list.get(i)).getContent());
+            if(matcher.matches()){
+                results.add(list.get(i));
+            }
+        }
+        return results;
+    }
+
     @Override
     public List<Data> searchDataByTag(Tag tag, String keyWord) throws SQLException {
         List<Data> oldlist=new ArrayList<>();
         List<Data> newlist=new ArrayList<>();
         oldlist=getDataByTag(tag.getTagName());
-        for(int i=0;i<oldlist.size();i++)
-        {
-
-        }
-
-        return null;
+        newlist=search(keyWord,oldlist);
+        return newlist;
     }
 
     @Override
