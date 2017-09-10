@@ -266,7 +266,7 @@ public class TagImp implements DataTagInterface, IntelTagInterface {
                 e.printStackTrace();
             }
         }
-
-
     }
+
+
 }

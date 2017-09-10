@@ -8,11 +8,11 @@ import main.database.databaseservece.TagImp;
 import main.database.databaseservece.WasherDataDao;
 import main.database.dbInterface.DataTagInterface;
 import main.database.dbInterface.IntelDao;
-import main.database.dbInterface.IntelTagInterface;
 import main.database.dbInterface.WasherData;
 
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class WashTest {
@@ -59,22 +59,34 @@ public class WashTest {
         try {
             IntelDao intelDao = new Intelseverce();
 
-            Calendar calendar = new Calendar.Builder().build();
-//            calendar.add(Calendar.DATE, );
 
-//            Intel intel = intelDao.findIntelBefore();
 
-            Intel intel = new Intel();
-            intel.setIntelID("1");
-
-            IntelTagInterface intelTagInterface = new TagImp();
-            List<Tag> list = intelTagInterface.getTagsOfIntel(intel);
-            System.out.println("-----------------------------");
-            for (Tag tag2 : list){
-                System.out.println(tag2.getTagName());
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.add(Calendar.DATE, -30);
+            System.out.println(cal.getTime());
+            List<Intel> list = intelDao.findIntelBefore(new java.sql.Date(cal.getTime().getTime()));
+            List<Intel> list1 = intelDao.findIntelbetween(new java.sql.Date(cal.getTime().getTime()), new java.sql.Date(new Date().getTime()));
+            System.out.println("----------------------------");
+            if(list != null){
+                for (Intel intel : list){
+                    System.out.println(intel.getIntelID());
+                }
+            } else {
+                System.out.println("hahhahaha");
             }
 
-            intelTagInterface.copyTagToData(data1,intel);
+
+            System.out.println("----------------------------");
+
+            if(list != null){
+                for (Intel intel : list1){
+                    System.out.println(intel.getIntelID());
+                }
+            } else {
+                System.out.println("hahhahaha");
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
