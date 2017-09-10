@@ -58,22 +58,22 @@ function searchFunction(searchInfo){
             console.log(arr);
             for (var i = 0; i < arr.length; i++) {
                 $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                    "                            <td style=\"width: 20%\">+arr[i].Title+</td>\n" +
-                    "                            <td style=\"width: 10%\">+arr[i].Tag+</td>\n" +
+                    "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
+                    "                            <td style=\"width: 10%\">"+arr[i].Tag+"</td>\n" +
                     "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\"+arr[i].Title+\" onclick=\"formDataView(this)\">查看</a>\n" +
+                    "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataView(this)\">查看</a>\n" +
                     "                            </td>\n" +
                     "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\"+arr[i].Title+\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
+                    "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
                     "                            </td>\n" +
                     "                        </tr>"
                 )
             }
             $("#NowTitle").text(arr[0].Title);
             $("#NowAuthor").text("作者："+arr[0].Author);
-            $("#NowPublishTime").text("发布时间："+arr[0].PulishTime);
+            $("#NowPublishTime").text("发布时间："+arr[0].PulishDate);
             $("#NowTag").text("标签："+arr[0].Tag);
-            $("#NowUrl").text("网址："+arr[0].Url);
+            $("#NowUrl").text("网址："+arr[0].URL);
             $("#NowContent").text(arr[0].Content)
         },
         error: function () {
@@ -89,21 +89,36 @@ function formDataView(obj){
     var json=JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/apt//data/information",
+        url: "/apt/data/information",
         contentType: 'application/json; charset=utf-8', // 很重要
         dataType: "json",
         data : json,
         success: function (daa) {
-            $("tr").remove(".formData");
-            console.log("数据为",daa);
-            var arr = daa.array;
-            console.log(arr);
-            $("#NowTitle").text(arr[0].dataTitle);
-            $("#NowAuthor").text("作者："+arr[0].dataAuthor);
-            $("#NowPublishTime").text("发布时间："+arr[0].dataPulishdate);
-            $("#NowTag").text("标签："+arr[0].dataTag);
-            $("#NowUrl").text("网址："+arr[0].dataUrl);
-            $("#NowContent").text(arr[0].dataContent);
+            $(".contentTable").remove();
+            $("#InfoRight").append(
+                "<table class=\"contentTable\">\n" +
+                "<th id=\"NowTitle\" colspan=\"2\">"+daa.dataTitle+"</th>\n" +
+                "                    <tr>\n" +
+                "                        <td id=\"NowAuthor\">作者："+daa.dataAuthor+"</td>\n" +
+                "                        <td id=\"NowPublishTime\">发布日期："+daa.dataPulishdate+"</td>\n" +
+                "                    </tr>\n" +
+                "                    <tr>\n" +
+                "                        <td id=\"NowTag\" colspan=\"2\">标签:"+daa.dataTag+"</td>\n" +
+                "                    </tr>\n" +
+                "                    <tr>\n" +
+                "                        <td id=\"NowUrl\" colspan=\"2\">网址:"+daa.dataUrl+"</td>\n" +
+                "                    </tr>\n" +
+                "                    <tr>\n" +
+                "                        <td id=\"NowContent\" colspan=\"2\">"+daa.dataContent+"</td>\n" +
+                "                    </tr>"+
+            "                </table>"
+            )
+            // $("#NowTitle").text(arr[0].dataTitle);
+            // $("#NowAuthor").text("作者："+arr[0].dataAuthor);
+            // $("#NowPublishTime").text("发布时间："+arr[0].dataPulishDate);
+            // $("#NowTag").text("标签："+arr[0].dataTag);
+            // $("#NowUrl").text("网址："+arr[0].dataURL);
+            // $("#NowContent").text(arr[0].dataContent);
             alert("查看成功");
         },
         error: function () {
@@ -249,7 +264,6 @@ $(document).ready(function(){
             if(signal=="Output Success"){
                 $("tr").remove(".formData");
                 var arr = daa.jsonarray;
-                console.log(arr);
                 for (var i = 0; i < arr.length; i++) {
                     $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
                         "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
@@ -265,9 +279,9 @@ $(document).ready(function(){
                 }
                 $("#NowTitle").text(arr[0].Title);
                 $("#NowAuthor").text("作者："+arr[0].Author);
-                $("#NowPublishTime").text("发布时间："+arr[0].PulishTime);
+                $("#NowPublishTime").text("发布时间："+arr[0].PublishDate);
                 $("#NowTag").text("标签："+arr[0].Tag);
-                $("#NowUrl").text("网址："+arr[0].Url);
+                $("#NowUrl").text("网址："+arr[0].URL);
                 $("#NowContent").text(arr[0].Content)
             }else if(signal=="Output Fail"){
             }
