@@ -61,23 +61,7 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown danger">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
-                        <ul class="dropdown-menu danger  animated fadeInDown">
-                            <a href="" onclick="collection()">
-                                <li class="list-group-item message" style="font-size: 20px">
-                                    查看所有收藏
-                                </li>
-                            </a>
-                            <li>
-                                <ul class="list-group notifications">
-                                    <a href="#">
-                                        <li style="width:400px;height: 30px;line-height: 30px; font-size:20px ">
-                                            hahaaaaaaaa
-                                        </li>
-                                    </a>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href="#" onclick="collection()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
                     </li>
                     <li class="dropdown profile">
                         <a href="#" id="UserName" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -193,6 +177,8 @@
                             <th style="width: 10%">标签</th>
                             <th style="width: 5%">查看</th>
                             <th style="width: 5%">收藏</th>
+                        </tr>
+                        <tr id="FormData" class="formData">
                         </tr>
                     </table>
                 </div>

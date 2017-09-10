@@ -2,9 +2,8 @@ package main.servlet;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import main.Beans.SystemUser;
 import main.Beans.Data;
+import main.Beans.SystemUser;
 import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataInterface;
@@ -32,10 +31,6 @@ public class UserCollectionServlet extends HttpServlet {
         JsonObject object = new JsonObject();
         UserDao dao1 = new Userseverce();
         try {
-
-            String data = UserregisterServlet.getBody(request);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
             user = (SystemUser)request.getSession().getAttribute("user");
         }catch (Exception e) {
             object.addProperty("signal","Search User Fail");
