@@ -217,7 +217,7 @@ public class TagImp implements DataTagInterface, IntelTagInterface {
             WashingConnect washingConnect = WashingConnect.getInstance();
             Connection connection = washingConnect.getConn();
 
-            String sql = "SELECT * FROM Tag_info WHERE id IN(SELECT tagid FROM in telligencetag_info WHERE intelligenceid = ?);";
+            String sql = "SELECT * FROM Tag_info WHERE id IN(SELECT tagid FROM intelligencetag_info WHERE intelligenceid = ?);";
             sta = connection.prepareStatement(sql);
             sta.setString(1, intel.getIntelID());
             res = sta.executeQuery();

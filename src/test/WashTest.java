@@ -11,7 +11,6 @@ import main.database.dbInterface.IntelDao;
 import main.database.dbInterface.IntelTagInterface;
 import main.database.dbInterface.WasherData;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
@@ -34,21 +33,21 @@ public class WashTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+//
         Tag tag1 = dataTagInterface.findByName("wahaha");
         System.out.println(tag1.getTagName());
 
         try {
             dataTagInterface.addTagToData(data1,tag1);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-
+//
+//
         try {
             List<Tag> list = dataTagInterface.getTagsOfData(data1);
+            System.out.println("--------------tag name of data---------------");
 
             for (Tag tag2 : list){
                 System.out.println(tag2.getTagName());
@@ -64,6 +63,9 @@ public class WashTest {
 //            calendar.add(Calendar.DATE, );
 
 //            Intel intel = intelDao.findIntelBefore();
+
+            Intel intel = new Intel();
+            intel.setIntelID("1");
 
             IntelTagInterface intelTagInterface = new TagImp();
             List<Tag> list = intelTagInterface.getTagsOfIntel(intel);
