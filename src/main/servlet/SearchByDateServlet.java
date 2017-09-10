@@ -30,7 +30,7 @@ public class SearchByDateServlet extends HttpServlet {
             JsonParser parser = new JsonParser();
             object = (JsonObject) parser.parse(data);
             DataInterface dao = new Dataservece();
-            List<Data> a = dao.getDataLimitBeforeDate(now,3);
+            List<Data> a = dao.getDataLimitBeforeDate(now,10);
             int i = 0;
             JsonArray array  = new JsonArray();
             for (Data ob : a){
