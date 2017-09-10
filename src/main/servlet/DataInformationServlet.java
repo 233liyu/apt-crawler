@@ -3,7 +3,6 @@ package main.servlet;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import main.Beans.Data;
-import main.Beans.SystemUser;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
 
@@ -37,6 +36,7 @@ public class DataInformationServlet extends HttpServlet {
         try {
             data_id=object.get("dataId").getAsString();
             a=dao.getDataByID(data_id);
+            data_title=a.getTitle();
             data_author =a.getAuthor();
             data_content=a.getContent();
             data_crawldate=a.getCrawlDate().toString();
@@ -53,6 +53,7 @@ public class DataInformationServlet extends HttpServlet {
             return;
         }
         try {
+            object.addProperty("dataTitle",data_title);
             object.addProperty("dataAuthor", data_author);
             object.addProperty("dataContent", data_content);
             object.addProperty("dataCrawldate", data_crawldate);

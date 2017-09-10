@@ -2,7 +2,6 @@ package main.servlet;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import main.Beans.Data;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
@@ -54,10 +53,10 @@ public class SearchByDateServlet extends HttpServlet {
             out.write(retString);
             out.flush();
             response.flushBuffer();
+            e.printStackTrace();
             return;
         }
         object.addProperty("signal","Output Success");
-
         retString = object.toString();
         out.write(retString);
         out.flush();

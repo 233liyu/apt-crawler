@@ -84,11 +84,12 @@ function searchFunction(searchInfo){
 //点击查看后显示信息-------------------------------------------------
 function formDataView(obj){
     var searchInfo=obj.id;
+    alert(searchInfo);
     var data={"dataId":searchInfo};
     var json=JSON.stringify(data);
     $.ajax({
         type: "post",
-        url: "/apt/homepage/search_info",
+        url: "/apt//data/information",
         contentType: 'application/json; charset=utf-8', // 很重要
         dataType: "json",
         data : json,
@@ -97,12 +98,13 @@ function formDataView(obj){
             console.log("数据为",daa);
             var arr = daa.array;
             console.log(arr);
-            $("#NowTitle").text(arr[0].Title);
-            $("#NowAuthor").text("作者："+arr[0].Author);
-            $("#NowPublishTime").text("发布时间："+arr[0].PulishTime);
-            $("#NowTag").text("标签："+arr[0].Tag);
-            $("#NowUrl").text("网址："+arr[0].Url);
-            $("#NowContent").text(arr[0].Content)
+            $("#NowTitle").text(arr[0].dataTitle);
+            $("#NowAuthor").text("作者："+arr[0].dataAuthor);
+            $("#NowPublishTime").text("发布时间："+arr[0].dataPulishdate);
+            $("#NowTag").text("标签："+arr[0].dataTag);
+            $("#NowUrl").text("网址："+arr[0].dataUrl);
+            $("#NowContent").text(arr[0].dataContent);
+            alert("查看成功");
         },
         error: function () {
             alert("未搜索到相关信息");
@@ -209,7 +211,6 @@ $(document).ready(function(){
     var data={
         "demand":"UserInfo"
     };
-    alert("加载用户！");
     var json=JSON.stringify(data);
     $.ajax({
         url:"/apt/user/Information",
@@ -218,11 +219,9 @@ $(document).ready(function(){
         contentType:'application/json; charset=utf-8', // 很重要
         type:"post",
         success:function(daa){
-            signal
             if(daa.signal=="User Informartion Success"){
-                alert("用户信息加载成功");
                 $("#UserName").text(daa.Username);
-                $(".username").text(daa.Username);
+                $("#Username1").text(daa.Username);
                 $("#eamilInfo").text(daa.Useremail);
             }else if(daa.signal=="User Informartion Fail"){
                 alert("用户信息加载失败")
@@ -235,8 +234,9 @@ $(document).ready(function(){
 });
 //登陆后搜所有信息--------------------------------------------------------
 $(document).ready(function(){
-    alert("加载信息");
-    var data={"demand":"DisplayAllInfo"};
+    var data={
+        "demand":"DisplayAllInfo"
+    };
     var json=JSON.stringify(data);
     $.ajax({
         type: "post",
@@ -248,18 +248,17 @@ $(document).ready(function(){
             var signal=daa.signal;
             if(signal=="Output Success"){
                 $("tr").remove(".formData");
-                console.log("数据为",daa);
                 var arr = daa.jsonarray;
                 console.log(arr);
                 for (var i = 0; i < arr.length; i++) {
                     $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                        "                            <td style=\"width: 20%\">+arr[i].Title+</td>\n" +
-                        "                            <td style=\"width: 10%\">+arr[i].Tag+</td>\n" +
+                        "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
+                        "                            <td style=\"width: 10%\">"+arr[i].Tag+"</td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].Id+\" onclick=\"formDataView(this)\">查看</a>\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataView(this)\">查看</a>\n" +
                         "                            </td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].Id+\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
                         "                            </td>\n" +
                         "                        </tr>"
                     )
@@ -270,9 +269,7 @@ $(document).ready(function(){
                 $("#NowTag").text("标签："+arr[0].Tag);
                 $("#NowUrl").text("网址："+arr[0].Url);
                 $("#NowContent").text(arr[0].Content)
-                alert("数据加载成功")
             }else if(signal=="Output Fail"){
-                alert("数据输出失败")
             }
         },
         error: function (daa) {

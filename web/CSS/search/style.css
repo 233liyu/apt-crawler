@@ -40,6 +40,14 @@ body {background:url("../../img/hero.jpg") no-repeat center center fixed; backgr
     font-size: 15px;
     color: #DDDDDD
 }
+.formData a{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    height: 40px;
+    font-size: 15px;
+    color: #DDDDDD
+}
 
 .infoRight{
     width: 50%;
