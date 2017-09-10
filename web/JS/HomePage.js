@@ -212,18 +212,23 @@ $(document).ready(function(){
     alert("加载用户！");
     var json=JSON.stringify(data);
     $.ajax({
-        url:"/apt/user/information",
+        url:"/apt/user/Information",
         data:json,
         dataType:"json",
         contentType:'application/json; charset=utf-8', // 很重要
         type:"post",
         success:function(daa){
-            $("#UserName").text(UserName);
-            $(".username").text(UserName);
-            $("#eamilInfo").text(UserEmail);
+            if(daa.signal=="Demand Success"){
+                $("#UserName").text(UserName);
+                $(".username").text(UserName);
+                $("#eamilInfo").text(UserEmail);
+                alert("用户信息加载成功")
+            }else if(daa.signal=="Demang Fail"){
+                alert("用户信息加载失败")
+            }
         },
         error:function(){
-            console.log("error!!!!!!")
+            alert("用户信息后台未发包");
         }
     })
 });
@@ -240,7 +245,7 @@ $(document).ready(function(){
         data : json,
         success: function (daa) {
             var signal=daa.signal;
-            if(signal.equal("Output Success")){
+            if(signal=="Output Success"){
                 $("tr").remove(".formData");
                 console.log("数据为",daa);
                 var arr = daa.jsonarray;
@@ -264,13 +269,13 @@ $(document).ready(function(){
                 $("#NowTag").text("标签："+arr[0].Tag);
                 $("#NowUrl").text("网址："+arr[0].Url);
                 $("#NowContent").text(arr[0].Content)
-            }else if(signal.equal("Output Fail")){
+                alert("数据加载成功")
+            }else if(signal=="Output Fail"){
                 alert("数据输出失败")
             }
         },
-        error: function () {
-            console.log("heiheiheiheihei");
-            alert("搜索错误");
+        error: function (daa) {
+            alert("数据信息后台未发包");
         }
     })
 });
