@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>The APT Informationm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <!-- Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="../CSS/style.css">
     <link rel="stylesheet" type="text/css" href="../CSS/themes/flat-blue.css">
     <!--搜索栏样式-->
-    <script src="../JS/modernizr.js"></script>
+    <!--<script src="../JS/modernizr.js"></script>-->
     <link rel="stylesheet" href="../CSS/search/normalize.css">
     <link rel="stylesheet" href="../CSS/search/style.css">
     <!-- Javascript Libs -->
@@ -35,16 +35,15 @@
     <script type="text/javascript" src="../lib/js/ace/ace.js"></script>
     <script type="text/javascript" src="../lib/js/ace/mode-html.js"></script>
     <script type="text/javascript" src="../lib/js/ace/theme-github.js"></script>
+    <script src="../JS/HomePage.js"></script>
     <!-- Javascript -->
 
 </head>
-
 <body class="flat-blue">
 
 <!---------------------------------------------------------------------------------->
-
+<!--初始界面查询信息 -->
 <!---------------------------------------------------------------------------------->
-
 <div class="app-container">
     <div class="row content-container">
         <nav class="navbar navbar-inverse navbar-fixed-top navbar-top">
@@ -61,11 +60,24 @@
                     </button>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-
                     <li class="dropdown danger">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            <i class="fa fa-star-half-o"></i>
-                        </a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
+                        <ul class="dropdown-menu danger  animated fadeInDown">
+                            <a href="" onclick="collection()">
+                                <li class="list-group-item message" style="font-size: 20px">
+                                    查看所有收藏
+                                </li>
+                            </a>
+                            <li>
+                                <ul class="list-group notifications">
+                                    <a href="#">
+                                        <li style="width:400px;height: 30px;line-height: 30px; font-size:20px ">
+                                            hahaaaaaaaa
+                                        </li>
+                                    </a>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                     <li class="dropdown profile">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -78,7 +90,7 @@
                             <li>
                                 <div class="profile-info">
                                     <h4 class="username">Emily Hart</h4>
-                                    <p>emily_hart@email.com</p>
+                                    <p id="eamilInfo">emily_hart@email.com</p>
                                     <div class="btn-group margin-bottom-2x" role="group">
                                         <button type="button" class="btn btn-default"><i class="fa fa-user"></i> 我的信息
                                         </button>
@@ -173,29 +185,43 @@
                 <input id="SearchInfo" type="search" placeholder="Search here..." required>
                 <button id="Search" type="submit" >Search</button>
             </div>
-            <div id="InfoForm" class="infoForm">
-                <table id="Table" style="width: 100%">
-                    <tr id="FormHead" class="formHead">
-                        <!--<th style="width: 5%">
-                            <input type="checkbox" name="checkbox" />
-                        </th>-->
-                        <th style="width: 12%">主题</th>
-                        <th style="width: 12%">作者</th>
-                        <th style="width: 12%">日期</th>
-                        <th style="width: 12%">概述</th>
-                        <th style="width: 12%">网址</th>
-                        <th style="width: 35%">正文</th>
+            <div id="InfoFloat" class="infoFloat">
+                <div id="InfoForm" class="infoForm">
+                    <table id="Table" style="width: 100%">
+                        <tr id="FormHead" class="formHead">
+                            <th style="width: 20%">主题</th>
+                            <th style="width: 10%">标签</th>
+                            <th style="width: 5%">查看</th>
+                            <th style="width: 5%">收藏</th>
+                        </tr>
+                        <!--<tr id="FormData" class="formData">-->
+                            <!--<td style="width: 20%"></td>-->
+                            <!--<td style="width: 10%"></td>-->
+                            <!--<td style="width: 5%">-->
+                                <!--<a id="" onclick="formDataView(this)">查看</a>-->
+                            <!--</td>-->
+                            <!--<td style="width: 5%">-->
+                                <!--<a id="" onclick="formDataCollection(this)">收藏</a>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    </table>
+                </div>
+            </div>
+            <div id="InfoRight" class="infoRight">
+                <table class="contentTable">
+                    <th id="NowTitle" colspan="2">标题</th>
+                    <tr>
+                        <td id="NowAuthor">作者：</td>
+                        <td id="NowPublishTime">发布日期：</td>
                     </tr>
-                    <tr id="FormData" class="formData">
-                        <!--<td  style="width: 5%">
-                            <input type="checkbox" name="checkbox" />
-                        </td>-->
-                        <td style="width: 12%"></td>
-                        <td style="width: 12%"></td>
-                        <td style="width: 12%"></td>
-                        <td style="width: 12%"></td>
-                        <td style="width: 12%"></td>
-                        <td style="width: 35%"></td>
+                    <tr>
+                        <td id="NowTag" colspan="2">标签</td>
+                    </tr>
+                    <tr>
+                        <td id="NowUrl" colspan="2">网址</td>
+                    </tr>
+                    <tr>
+                        <td id="NowContent" colspan="2">正文</td>
                     </tr>
                 </table>
             </div>
@@ -203,56 +229,5 @@
     </div>
 </div>
 
-
-<script>
-    $("#Search").click(
-        function () {
-//            alert("值为: " + $("#SearchInfo").val());
-            var searchInfo = $("#SearchInfo").val();
-            if (searchInfo.length == 0) {
-                alert("请输入查询信息！");
-            }
-            else {
-                var data = {
-                    "demand": searchInfo
-                };
-                var json = JSON.stringify(data);
-                $.ajax({
-                    url: "/apt/homepage/search_info",
-                    type: "post",
-                    contentType: 'application/json; charset=utf-8', // 很重要
-                    dataType: "json",
-                    data: json,
-                    success: function (daa) {
-                        $("tr").remove(".formData");
-                        console.log("数据为",daa);
-                        var arr = daa.jsonarray;
-                        console.log(arr);
-                        for (var i = 0; i < arr.length; i++) {
-                            $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                                "                        <!--<td  style=\"width: 5%\">\n" +
-                                "                        <input type=\"checkbox\" name=\"checkbox\" />\n" +
-                                "                        </td>-->\n" +
-                                "                        <td  style=\"width: 12%\">"+ arr[i].Title +"</td>\n" +
-                                "                        <td  style=\"width: 12%\">"+ arr[i].Arrthor+"</td>\n" +
-                                "                        <td  style=\"width: 12%\">"+ arr[i].PublshTime+"</td>\n" +
-                                "                        <td  style=\"width: 12%\">"+ arr[i].Content+"</td>\n" +
-                                "                        <td  style=\"width: 12%\">"+ arr[i].URL+"</td>\n" +
-                                "                        <td  style=\"width: 35%\">"+arr[i].Sites+"</td>\n" +
-                                "                        </tr>"
-                            )
-                        }
-
-                    },
-                    error: function () {
-                        alert("未搜索到相关信息");
-                    }
-                })
-            }
-        }
-    )
-</script>
-
 </body>
-
 </html>
