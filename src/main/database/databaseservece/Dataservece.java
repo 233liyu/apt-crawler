@@ -94,11 +94,7 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override
@@ -115,7 +111,7 @@ public class Dataservece implements DataInterface {
             String sql="select * from data_info where Date(publishtime) > ? ORDER BY publishtime DESC limit 0,?";
             sta=con.prepareStatement(sql);
             sta.setString(1,time);
-            sta.setString(2,String.valueOf(limits));
+            sta.setInt(2,limits);
             res=sta.executeQuery();
             list=finddata(res);
             System.out.println("查询成功");
@@ -128,11 +124,7 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override
@@ -144,10 +136,11 @@ public class Dataservece implements DataInterface {
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="select * from data_info ORDER BY publishtime DESC limit ?,?";
+            String sql="select * from data_info ORDER BY publishtime DESC limit ?,?;";
             sta=con.prepareStatement(sql);
-            sta.setString(1,String.valueOf(Start));
-            sta.setString(2,String.valueOf(end));
+            sta.setInt(1,Start);
+            sta.setInt(2,end-Start);
+            System.out.println(sql);
             res=sta.executeQuery();
             list=finddata(res);
             System.out.println("查询成功");
@@ -160,11 +153,7 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override
@@ -190,11 +179,7 @@ public class Dataservece implements DataInterface {
         finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override
