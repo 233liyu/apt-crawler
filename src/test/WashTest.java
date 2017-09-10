@@ -8,12 +8,11 @@ import main.database.databaseservece.TagImp;
 import main.database.databaseservece.WasherDataDao;
 import main.database.dbInterface.DataTagInterface;
 import main.database.dbInterface.IntelDao;
-import main.database.dbInterface.IntelTagInterface;
 import main.database.dbInterface.WasherData;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class WashTest {
@@ -34,21 +33,21 @@ public class WashTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+//
         Tag tag1 = dataTagInterface.findByName("wahaha");
         System.out.println(tag1.getTagName());
 
         try {
             dataTagInterface.addTagToData(data1,tag1);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-
-
+//
+//
         try {
             List<Tag> list = dataTagInterface.getTagsOfData(data1);
+            System.out.println("--------------tag name of data---------------");
 
             for (Tag tag2 : list){
                 System.out.println(tag2.getTagName());
@@ -58,23 +57,38 @@ public class WashTest {
         }
 
         try {
-//            IntelDao intelDao = new Intelseverce();
-//
-//            Calendar calendar = new Calendar.Builder().build();
-////            calendar.add(Calendar.DATE, );
-//
-////            Intel intel = intelDao.findIntelBefore();
-//
-//            IntelTagInterface intelTagInterface = new TagImp();
-//            List<Tag> list = intelTagInterface.getTagsOfIntel(intel);
-//            System.out.println("-----------------------------");
-//            for (Tag tag2 : list){
-//                System.out.println(tag2.getTagName());
-//            }
-//
-//            intelTagInterface.copyTagToData(data1,intel);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
+            IntelDao intelDao = new Intelseverce();
+
+
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.add(Calendar.DATE, -30);
+            System.out.println(cal.getTime());
+            List<Intel> list = intelDao.findIntelBefore(new java.sql.Date(cal.getTime().getTime()));
+            List<Intel> list1 = intelDao.findIntelbetween(new java.sql.Date(cal.getTime().getTime()), new java.sql.Date(new Date().getTime()));
+            System.out.println("----------------------------");
+            if(list != null){
+                for (Intel intel : list){
+                    System.out.println(intel.getIntelID());
+                }
+            } else {
+                System.out.println("hahhahaha");
+            }
+
+
+            System.out.println("----------------------------");
+
+            if(list != null){
+                for (Intel intel : list1){
+                    System.out.println(intel.getIntelID());
+                }
+            } else {
+                System.out.println("hahhahaha");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

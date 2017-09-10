@@ -1,7 +1,7 @@
 package main.database.databaseservece;
 
 import main.Beans.Data;
-import main.Beans.Tag;
+import main.Beans.Intel;
 import main.database.databaseconnect.WashingConnect;
 import main.database.dbInterface.WasherData;
 
@@ -114,5 +114,30 @@ public class WasherDataDao implements WasherData{
             }
         }
 
+    }
+
+    @Override
+    public void LinkDataIntel(Data data, Intel intel) throws Exception {
+        PreparedStatement sta = null;
+        try {
+            WashingConnect washingConnect = WashingConnect.getInstance();
+            Connection connection = washingConnect.getConn();
+
+            String sql = "INSERT INTO dataintelligence_info (dataid, intelligenceid, time)  VALUES (?, ? , DATE (now()));" ;
+            sta = connection.prepareStatement(sql);
+            sta.setString(1,data.getDataID());
+            sta.setString(2,intel.getIntelID());
+            sta.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("123");
+        } finally {
+            try {
+                sta.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
