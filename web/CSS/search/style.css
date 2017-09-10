@@ -1,8 +1,8 @@
 body {background:url("../../img/hero.jpg") no-repeat center center fixed; background-size:cover;}
 
-.infoSearch {width: 50%;height: 40px;margin:0 25% ;background: #444;background: rgba(0,0,0,.2);border-radius:  10px;border: 1px solid #fff;}
+.infoSearch {width: 60%;margin:auto 20%;float :left;height: 40px;background: #444;background: rgba(0,0,0,.2);border-radius:  10px;border: 1px solid #fff;}
 
-.infoSearch input {width: 75%;padding: 10px 5px;float:left;color: #ccc;border: 0;background: transparent;border-radius: 3px 0 0 3px;}
+.infoSearch input {width: 75%;font-size:20px;line-height: 40px;color: #ccc;border: 0;background: transparent;border-radius: 3px 0 0 3px;}
 
 .infoSearch input:focus {outline: 0;background:transparent;}
 
@@ -10,14 +10,19 @@ body {background:url("../../img/hero.jpg") no-repeat center center fixed; backgr
 
 .infoSearch button:hover{background: #fff;color:#444;}
 
+.infoFloat{width: 50%;float: left;}
+
 .infoForm{
-    width: 95%;
-    margin:3% 2.5%;
+    width: 100%;
+    margin:50px 0;
+    border-left: none;
+    border-right: none;
     color:#F9F9F9;
     background: #f6f6f6;
     background: rgba(0,0,0,.2);
     border-radius:  5px;
-    border: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-top:1px solid #fff;
 }
 .formHead th{
     padding-top: 15px;
@@ -34,4 +39,52 @@ body {background:url("../../img/hero.jpg") no-repeat center center fixed; backgr
     height: 40px;
     font-size: 15px;
     color: #DDDDDD
+}
+.formData a{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    height: 40px;
+    font-size: 15px;
+    color: #DDDDDD
+}
+
+.infoRight{
+    width: 50%;
+    height: 100%;
+    float:right;
+    border-left:1px solid #fff;
+    border-bottom: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0;
+    color:#F9F9F9;
+}
+
+.infoRight table{
+    width: 98%;
+    margin:50px 1%;
+    border-left: none;
+    border-right: none;
+    background: #f6f6f6;
+    background: rgba(0,0,0,.2);
+}
+.infoRight th{
+    font-size: 20px;
+    text-align: center;
+    height: 50px;
+}
+.infoRight tr{
+    font-size: 16px;
+    height: 40px;
+}
+.infoRight td{
+    font-size: 16px;
+    height: 40px;
+}
+.formData-view{
+    text-decoration:none
+}
+.formData-collection{
+    text-decoration:none
 }

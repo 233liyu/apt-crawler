@@ -36,8 +36,9 @@ public class LikeChangeServlet extends HttpServlet {
             JsonParser parser = new JsonParser();
             object = (JsonObject) parser.parse(data);
             LikeChange = object.get("LikeChange").getAsString();
-            user =(SystemUser)request.getSession().getAttribute("user");
-            DataID = object.get("DataID").getAsString();
+            UserID = object.get("UserID").getAsString();
+            user = dao1.findUserByID(UserID);
+            DataID = object.get("DataTitle").getAsString();
         } catch (Exception e) {
             object.addProperty("signal", "Like Change Fail");
             retString = object.toString();
@@ -64,7 +65,7 @@ public class LikeChangeServlet extends HttpServlet {
             out.flush();
             response.flushBuffer();
             return;
-        } else {
+        } else if(LikeChange.equals("DeleteLike")){
             try {
                 DataInterface dao =new Dataservece();
                 dao.deleteLike(user, DataID);
