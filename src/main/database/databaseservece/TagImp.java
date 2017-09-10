@@ -298,4 +298,35 @@ public class TagImp implements DataTagInterface, IntelTagInterface {
         }
         return list;
     }
+
+    @Override
+    public List<Data> getDataByTag(Tag tag) {
+            ResultSet res = null;
+            PreparedStatement sta = null;
+            List<Data> list = null;
+            try {
+                WashingConnect washingConnect = WashingConnect.getInstance();
+                Connection connection = washingConnect.getConn();
+
+                String sql = "SELECT * FROM data_info WHERE id IN (SELECT data_key FROM data_tag_table WHERE tag_key = ?)";
+                sta = connection.prepareStatement(sql);
+                sta.setString(1,tag.getTagID());
+                res = sta.executeQuery();
+
+                list = new Dataservece().finddata(res);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    sta.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (list == null) {
+                return new ArrayList<Data>();
+            }
+            return list;
+    }
 }

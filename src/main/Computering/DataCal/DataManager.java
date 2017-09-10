@@ -11,10 +11,11 @@ public class DataManager {
     }
 
     private DataManager() {
-
+        wordCloudHandler = new wordCloudHandler();
     }
 
-    private wordCloudHandler wordCloudHandler ;
+    public wordCloudHandler wordCloudHandler ;
+
 
 
 }

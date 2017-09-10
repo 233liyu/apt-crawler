@@ -24,17 +24,21 @@ public class wordCloudHandler {
         DataTagInterface dataTagInterface = new TagImp();
         List<Tag> list = dataTagInterface.getAllTags();
         for (Tag tag : list){
-            DataInterface dataInterface = new Dataservece();
+            System.out.println(tag.getTagName());
+            System.out.println(new TagImp().findByName(tag.getTagName()));
+
             try {
-                List<Data> dataList = dataInterface.getDataByTag(tag.getTagName());
+                List<Data> dataList = dataTagInterface.getDataByTag(tag);
                 System.out.println(dataList.size());
                 map.put(tag.getTagName(),dataList.size());
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        this.map.clear();
+        if (this.map != null){
+            this.map.clear();
+        }
         this.map = map;
         last_update = new Date();
     }

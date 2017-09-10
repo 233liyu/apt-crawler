@@ -25,4 +25,6 @@ public interface DataTagInterface {
     public Tag findByName(String name);
 
     public List<Tag> getAllTags();
+
+    public List<Data> getDataByTag(Tag tag);
 }

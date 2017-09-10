@@ -120,4 +120,12 @@
         <url-pattern>/user/register</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DataVisualization</servlet-name>
+        <servlet-class>main.servlet.WordCloudVisualization</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataVisualization</servlet-name>
+        <url-pattern>/data/word_cloud</url-pattern>
+    </servlet-mapping>
 </web-app>
