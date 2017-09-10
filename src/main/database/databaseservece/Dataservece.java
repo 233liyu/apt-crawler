@@ -112,6 +112,7 @@ public class Dataservece implements DataInterface {
             sta.setString(1,time);
             sta.setInt(2,limits);
             res=sta.executeQuery();
+//            System.out.println(time);
             list=finddata(res);
             System.out.println("查询成功");
         }

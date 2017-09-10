@@ -19,7 +19,7 @@ public class testclass {
         DataInterface dataInterface=new Dataservece();
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.DATE, -3);
+        cal.add(Calendar.DATE, -6);
         System.out.println(cal.getTime());
         List<Intel> list = intelDao.findIntelBefore(new java.sql.Date(cal.getTime().getTime()));
 //        List<Intel> list1 = intelDao.findIntelbetween(new java.sql.Date(cal.getTime().getTime()), new java.sql.Date(new Date().getTime()));
