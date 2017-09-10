@@ -4,8 +4,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import main.Beans.Data;
+import main.Beans.SystemUser;
 import main.database.databaseservece.Dataservece;
+import main.database.databaseservece.Userseverce;
+import main.database.dbInterface.DataHistory;
 import main.database.dbInterface.DataInterface;
+import main.database.dbInterface.UserDao;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,14 +51,14 @@ public class SearchByInfoServlet extends HttpServlet {
             DataInterface dao = new Dataservece();
             List<Data> a = dao.searchData(demand);
 //            Data arr[] = a.toArray(new Data[a.size()]);
-            if(a == null){
+            if (a == null) {
                 System.out.println("error, empty list a");
             }
             int i = 0;
             object.addProperty("signal", "Demand success");
-            JsonArray array =new JsonArray();
-            for (Data ob : a){
-                JsonObject object1 =new JsonObject();
+            JsonArray array = new JsonArray();
+            for (Data ob : a) {
+                JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
                 object1.addProperty("ID", ob.getDataID());
                 object1.addProperty("Author", ob.getAuthor());
@@ -63,14 +67,14 @@ public class SearchByInfoServlet extends HttpServlet {
                 object1.addProperty("SourceIntelID", ob.getSourceIntelID());
                 object1.addProperty("Title", ob.getTitle());
                 object1.addProperty("URL", ob.getURL());
-                String PublishDate =ob.getPublishDate().toString();
-                String CrawlDate =ob.getCrawlDate().toString();
-                object1.addProperty("PublishDate",PublishDate);
-                object1.addProperty("CrawlDate",CrawlDate);
+                String PublishDate = ob.getPublishDate().toString();
+                String CrawlDate = ob.getCrawlDate().toString();
+                object1.addProperty("PublishDate", PublishDate);
+                object1.addProperty("CrawlDate", CrawlDate);
                 array.add(object1);
                 i++;
             }
-            object.add("jsonarray",array);
+            object.add("jsonarray", array);
         } catch (Exception e) {
             object.addProperty("signal", "Demand Fail");
             e.printStackTrace();
@@ -82,6 +86,7 @@ public class SearchByInfoServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }
+
