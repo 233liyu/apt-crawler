@@ -4,6 +4,23 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          metadata-complete="false"
          version="3.1">
+    <servlet>
+        <servlet-name>TagSearchServlet</servlet-name>
+        <servlet-class>main.servlet.TagSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TagSearchServlet</servlet-name>
+        <url-pattern>/tag/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserImformationServlet</servlet-name>
+        <servlet-class>main.servlet.UserImformationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserImformationServlet</servlet-name>
+        <url-pattern>/user/imformation</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
@@ -13,7 +30,34 @@
         <servlet-name>UserLoginServlet</servlet-name>
         <url-pattern>/user/login</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>AddHistoryServlet</servlet-name>
+        <servlet-class>main.servlet.AddHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddHistoryServlet</servlet-name>
+        <url-pattern>/history/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <servlet-class>main.servlet.DeleteHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <url-pattern>/history/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LikeChangeServlet</servlet-name>
+        <servlet-class>main.servlet.LikeChangeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LikeChangeServlet</servlet-name>
+        <url-pattern>/like/change</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>SearchByInfoServlet</servlet-name>
         <servlet-class>main.servlet.SearchByInfoServlet</servlet-class>
@@ -42,12 +86,21 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>MainpageServlet</servlet-name>
-        <servlet-class>main.servlet.MainpageServlet</servlet-class>
+        <servlet-name>UserCollectionServlet</servlet-name>
+        <servlet-class>main.servlet.UserCollectionServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MainpageServlet</servlet-name>
-        <url-pattern>/mainpage</url-pattern>
+        <servlet-name>UserCollectionServlet</servlet-name>
+        <url-pattern>/homepage/usercollection</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <servlet-class>main.servlet.UserLogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserLogoutServlet</servlet-name>
+        <url-pattern>/user/logout</url-pattern>
     </servlet-mapping>
 
     <servlet>

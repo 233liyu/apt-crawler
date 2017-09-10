@@ -75,6 +75,10 @@ public class UserLoginServlet extends HttpServlet {
                     signal = 1;
                     HttpSession session = request.getSession();
                     session.setAttribute("user",user);
+                    session.setAttribute("username",user_name);
+                    session.setAttribute("password",user_password);
+                    session.setAttribute("power",user.getPower());
+                    session.setAttribute("email",user.getEmail());
 
                 }
 

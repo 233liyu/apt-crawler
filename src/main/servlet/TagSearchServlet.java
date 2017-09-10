@@ -4,12 +4,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import main.Beans.Data;
-import main.Beans.SystemUser;
+import main.Beans.Tag;
 import main.database.databaseservece.Dataservece;
-import main.database.databaseservece.Userseverce;
-import main.database.dbInterface.DataHistory;
+import main.database.databaseservece.TagImp;
 import main.database.dbInterface.DataInterface;
-import main.database.dbInterface.UserDao;
+import main.database.dbInterface.DataTagInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,11 +19,10 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-@WebServlet(name = "SearchByInfoServlet")
-
-public class SearchByInfoServlet extends HttpServlet {
+@WebServlet(name = "TagSearchServlet")
+public class TagSearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String demand = null;
+        String DataID = null;
         String retString = "";
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
@@ -35,10 +33,10 @@ public class SearchByInfoServlet extends HttpServlet {
             System.out.println(data);
             JsonParser parser = new JsonParser();
             object = (JsonObject) parser.parse(data);
-            demand = object.get("demand").getAsString();
+            DataID = object.get("dataID").getAsString();
         } catch (Exception e) {
 
-            object.addProperty("signal", "Demand Fail");
+            object.addProperty("signal", "Tag Search Fail");
             retString = object.toString();
             e.printStackTrace();
             out.write(retString);
@@ -48,37 +46,31 @@ public class SearchByInfoServlet extends HttpServlet {
         }
 
         try {
-            DataInterface dao = new Dataservece();
-            List<Data> a = dao.searchData(demand);
-//            Data arr[] = a.toArray(new Data[a.size()]);
+            DataTagInterface dao = new TagImp();
+            DataInterface dao1=new Dataservece();
+            Data data =dao1.getDataByID(DataID);
+            List<Tag> a = dao.getTagsOfData(data);
             if (a == null) {
                 System.out.println("error, empty list a");
             }
             int i = 0;
-            object.addProperty("signal", "Demand success");
+
             JsonArray array = new JsonArray();
-            for (Data ob : a) {
+            for (Tag ob : a) {
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
-                object1.addProperty("ID", ob.getDataID());
-                object1.addProperty("Author", ob.getAuthor());
-                object1.addProperty("Content", ob.getContent());
-                object1.addProperty("Sites", ob.getSites());
-                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object1.addProperty("Title", ob.getTitle());
-                object1.addProperty("URL", ob.getURL());
-                String PublishDate = ob.getPublishDate().toString();
-                String CrawlDate = ob.getCrawlDate().toString();
-                object1.addProperty("PublishDate", PublishDate);
-                object1.addProperty("CrawlDate", CrawlDate);
+                object1.addProperty("Category", ob.getTagCategory());
+                object1.addProperty("ID",ob.getTagID());
+                object1.addProperty("Name",ob.getTagName());
                 array.add(object1);
                 i++;
             }
             object.add("jsonarray", array);
         } catch (Exception e) {
-            object.addProperty("signal", "Demand Fail");
+            object.addProperty("signal", "Tag Search Fail");
             e.printStackTrace();
         }
+        object.addProperty("signal", "Tag Search Success");
         retString = object.toString();
         out.write(retString);
         out.flush();
@@ -89,4 +81,3 @@ public class SearchByInfoServlet extends HttpServlet {
         doPost(request, response);
     }
 }
-
