@@ -1,7 +1,10 @@
 package test;
 
+import main.Beans.Intel;
 import main.Beans.SystemUser;
+import main.database.databaseservece.Intelseverce;
 import main.database.databaseservece.Userseverce;
+import main.database.dbInterface.IntelDao;
 
 import java.util.List;
 
