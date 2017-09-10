@@ -13,7 +13,34 @@
         <servlet-name>UserLoginServlet</servlet-name>
         <url-pattern>/user/login</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+        <servlet-name>AddHistoryServlet</servlet-name>
+        <servlet-class>main.servlet.AddHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddHistoryServlet</servlet-name>
+        <url-pattern>/history/add</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <servlet-class>main.servlet.DeleteHistoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteHistoryServlet</servlet-name>
+        <url-pattern>/history/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LikeChangeServlet</servlet-name>
+        <servlet-class>main.servlet.LikeChangeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LikeChangeServlet</servlet-name>
+        <url-pattern>/like/change</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>SearchByInfoServlet</servlet-name>
         <servlet-class>main.servlet.SearchByInfoServlet</servlet-class>
@@ -58,6 +85,7 @@
         <servlet-name>UserLogoutServlet</servlet-name>
         <url-pattern>/user/logout</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>UserregisterServlet</servlet-name>
         <servlet-class>main.servlet.UserregisterServlet</servlet-class>
