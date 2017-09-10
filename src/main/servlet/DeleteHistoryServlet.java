@@ -50,7 +50,7 @@ public class DeleteHistoryServlet extends HttpServlet {
         if(DeleteHistory.equals("Delete All History"))
         {
             try{
-                user =dao1.findUserByID(UserID);
+                user =(SystemUser)request.getSession().getAttribute("user");
                 DataHistory history =new DataHistoryseverce();
                 history.DeleteAllHistory(user);
             }catch (Exception e)
@@ -72,7 +72,7 @@ public class DeleteHistoryServlet extends HttpServlet {
         if(DeleteHistory.equals("Delete Single History"))
         {
             try{
-                user =dao1.findUserByID(UserID);
+                user =(SystemUser)request.getSession().getAttribute("user");
                 DataHistory history =new DataHistoryseverce();
                 history.DeleteSingleHistory(user,DataID);
             }catch (Exception e)

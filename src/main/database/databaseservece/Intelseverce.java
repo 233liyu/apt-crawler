@@ -20,8 +20,9 @@ public class Intelseverce implements IntelDao {
             intel.setPublishDate(resultSet.getDate("publishtime"));
             intel.setSites(resultSet.getString("site"));
             intel.setTitle(resultSet.getString("title"));
-            intel.setURL(resultSet.getString("url"));
+            intel.setURL(resultSet.getString("URL"));
             intel.setCrawlDate(resultSet.getDate("crawltime"));
+            list.add(intel);
         }
 
         return list;
@@ -31,18 +32,18 @@ public class Intelseverce implements IntelDao {
     public Intel findIntelByID(int ID) throws SQLException {
         Dataconnect connect = new Dataconnect();
         ResultSet res = null;
-        Intel intel = new Intel();
+        Intel intel = null;
         PreparedStatement sta = null;
         List<Intel> list = new ArrayList<>();
         try {
             Connection con = null;
             con = connect.getConnection();
-            String sql = "select * from Intelligence_info where id =?";
+            String sql = "select * from Intelligence_info where id = ? ";
             sta = con.prepareStatement(sql);
-            sta.setString(1, String.valueOf(ID));
+            //sta.setString(1, String.valueOf(ID));
             res = sta.executeQuery();
+            System.out.println(sql);
             list = findintel(res);
-            intel = list.get(0);
             System.out.println("查询成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,9 +53,14 @@ public class Intelseverce implements IntelDao {
         }
         if(list.isEmpty())
         {
+            System.out.println("it is null");
             return null;
         }
-        else return list.get(0);
+        else
+        {
+            System.out.println("not null");
+            return    list.get(0);
+        }
 
     }
 
@@ -81,11 +87,7 @@ public class Intelseverce implements IntelDao {
         } finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 
     @Override
@@ -114,10 +116,6 @@ public class Intelseverce implements IntelDao {
         } finally {
             sta.close();
         }
-        if(list.isEmpty())
-        {
-            return null;
-        }
-        else return list;
+        return list;
     }
 }

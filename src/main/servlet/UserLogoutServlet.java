@@ -34,7 +34,7 @@ public class UserLogoutServlet extends HttpServlet {
             session.invalidate();
         }catch(Exception e)
         {
-            object.addProperty("signal","Logout Fail");
+            object.addProperty("signal","logout Fail");
             retString = object.toString();
             out.write(retString);
             out.flush();

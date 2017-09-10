@@ -2,7 +2,6 @@ package main.servlet;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import main.Beans.Data;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
@@ -25,12 +24,8 @@ public class SearchByDateServlet extends HttpServlet {
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
         try{
-
-            String data = UserregisterServlet.getBody(request);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
             DataInterface dao = new Dataservece();
-            List<Data> a = dao.getDataLimitBeforeDate(now,3);
+            List<Data> a = dao.getDataLimitBeforeDate(now,10);
             int i = 0;
             JsonArray array  = new JsonArray();
             for (Data ob : a){
@@ -58,10 +53,10 @@ public class SearchByDateServlet extends HttpServlet {
             out.write(retString);
             out.flush();
             response.flushBuffer();
+            e.printStackTrace();
             return;
         }
         object.addProperty("signal","Output Success");
-
         retString = object.toString();
         out.write(retString);
         out.flush();
