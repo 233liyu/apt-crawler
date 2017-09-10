@@ -18,17 +18,17 @@ public class WasherDataDao implements WasherData{
             Connection connection = washingConnect.getConn();
 
             String sql = "LOCK TABLES data_info WRITE;\n" ;
-            sta = connection.prepareStatement(sql);
-            sta.execute();
+//            sta = connection.prepareStatement(sql);
+//            sta.execute();
 
             sql = "CALL create_data(@qwe);";
             sta = connection.prepareStatement(sql);
             sta.execute();
 
 
-            sql = "UNLOCK TABLES;";
-            sta = connection.prepareStatement(sql);
-            sta.execute();
+//            sql = "UNLOCK TABLES;";
+//            sta = connection.prepareStatement(sql);
+//            sta.execute();
 
             sql = "SELECT @qwe;";
             sta = connection.prepareStatement(sql);

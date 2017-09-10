@@ -63,8 +63,9 @@ public class TagImp implements DataTagInterface, IntelTagInterface {
             return new ArrayList<Tag>();
         }
         return list;
-
     }
+
+
 
     @Override
     public Tag findByID(int id) throws SQLException {
@@ -268,5 +269,33 @@ public class TagImp implements DataTagInterface, IntelTagInterface {
         }
     }
 
+    @Override
+    public List<Tag> getAllTags() {
+        ResultSet res = null;
+        PreparedStatement sta = null;
+        List<Tag> list = null;
+        try {
+            WashingConnect washingConnect = WashingConnect.getInstance();
+            Connection connection = washingConnect.getConn();
 
+            String sql = "SELECT * FROM Tag_info;";
+            sta = connection.prepareStatement(sql);
+            res = sta.executeQuery();
+
+            list = getFromResult(res);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                sta.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (list == null) {
+            return new ArrayList<Tag>();
+        }
+        return list;
+    }
 }
