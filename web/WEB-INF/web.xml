@@ -4,6 +4,23 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          metadata-complete="false"
          version="3.1">
+    <servlet>
+        <servlet-name>TagSearchServlet</servlet-name>
+        <servlet-class>main.servlet.TagSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TagSearchServlet</servlet-name>
+        <url-pattern>/tag/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UserImformationServlet</servlet-name>
+        <servlet-class>main.servlet.UserImformationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserImformationServlet</servlet-name>
+        <url-pattern>/user/imformation</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>UserLoginServlet</servlet-name>
