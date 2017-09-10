@@ -218,12 +218,13 @@ $(document).ready(function(){
         contentType:'application/json; charset=utf-8', // 很重要
         type:"post",
         success:function(daa){
-            if(daa.signal=="Demand Success"){
-                $("#UserName").text(UserName);
-                $(".username").text(UserName);
-                $("#eamilInfo").text(UserEmail);
-                alert("用户信息加载成功")
-            }else if(daa.signal=="Demang Fail"){
+            signal
+            if(daa.signal=="User Informartion Success"){
+                alert("用户信息加载成功");
+                $("#UserName").text(daa.Username);
+                $(".username").text(daa.Username);
+                $("#eamilInfo").text(daa.Useremail);
+            }else if(daa.signal=="User Informartion Fail"){
                 alert("用户信息加载失败")
             }
         },
