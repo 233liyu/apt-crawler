@@ -65,7 +65,8 @@
                     </li>
                     <li class="dropdown profile">
                         <a href="#" id="UserName" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Emily Hart <span class="caret"></span>
+                            Emily Hart
+                            <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu animated fadeInDown">
                             <li class="profile-img">
@@ -104,8 +105,8 @@
                     </div>
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="../html/HomePage.html">
-                                <span class="icon fa fa-tachometer"></span><span class="title">最新信息</span>
+                            <a href="">
+                                <span class="icon fa fa-tachometer" onclick="searchAll()"></span><span class="title">最新信息</span>
                             </a>
                         </li>
                         <li class="panel panel-default dropdown">
@@ -167,7 +168,7 @@
         <div id="MainContent" class="mainContent">
             <div id="InfoSearch" class="infoSearch">
                 <input id="SearchInfo" type="search" placeholder="Search here..." required>
-                <button id="Search" type="submit" >Search</button>
+                <button id="Search" type="submit" onclick="searchByInfo()">Search</button>
             </div>
             <div id="InfoFloat" class="infoFloat">
                 <div id="InfoForm" class="infoForm">
