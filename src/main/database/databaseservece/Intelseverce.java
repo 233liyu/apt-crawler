@@ -75,7 +75,7 @@ public class Intelseverce implements IntelDao {
             con = connect.getConnection();
             String time;
             time = DateFormat.getDateInstance().format(date);
-            String sql = "select * from Intelligence_info where Date(publishtime) < ?";
+            String sql = "select * from Intelligence_info where Date(publishtime) > ?";
             sta = con.prepareStatement(sql);
             sta.setString(1, time);
             res = sta.executeQuery();

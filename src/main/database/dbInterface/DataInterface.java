@@ -28,7 +28,7 @@ public interface DataInterface {
 
     public List<Data> searchData(String keyWord) throws SQLException;
 
-    public List<Data> searchDataByTag(Tag tag, String keyWord);
+    public List<Data> searchDataByTag(Tag tag, String keyWord) throws SQLException;
 
     public List<Data> searchLike(SystemUser systemUser) throws SQLException;
 
