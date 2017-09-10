@@ -53,31 +53,34 @@ function searchFunction(searchInfo){
         data: json,
         success: function (daa) {
             $("tr").remove(".formData");
-            console.log("数据为", daa);
-            var arr = daa.array;
-            console.log(arr);
-            for (var i = 0; i < arr.length; i++) {
-                $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                    "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
-                    "                            <td style=\"width: 10%\">"+arr[i].Tag+"</td>\n" +
-                    "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataView(this)\">查看</a>\n" +
-                    "                            </td>\n" +
-                    "                            <td style=\"width: 5%\">\n" +
-                    "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
-                    "                            </td>\n" +
-                    "                        </tr>"
-                )
+            var arr = daa.jsonarray;
+            if(arr.length>0){
+                for (var i = 0; i < arr.length; i++) {
+                    $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
+                        "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
+                        "                            <td style=\"width: 10%\">"+arr[i].Tag+"</td>\n" +
+                        "                            <td style=\"width: 5%\">\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataView(this)\">查看</a>\n" +
+                        "                            </td>\n" +
+                        "                            <td style=\"width: 5%\">\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
+                        "                            </td>\n" +
+                        "                        </tr>"
+                    )
+                }
+                $("#NowTitle").text(arr[0].Title);
+                $("#NowAuthor").text("作者："+arr[0].Author);
+                $("#NowPublishTime").text("发布时间："+arr[0].PulishDate);
+                $("#NowTag").text("标签："+arr[0].Tag);
+                $("#NowUrl").text("网址："+arr[0].URL);
+                $("#NowContent").text("正文："+arr[0].Content)
+            }else if(arr.length==0){
+                alert("未查到相关信息，返回上一界面");
             }
-            $("#NowTitle").text(arr[0].Title);
-            $("#NowAuthor").text("作者："+arr[0].Author);
-            $("#NowPublishTime").text("发布时间："+arr[0].PulishDate);
-            $("#NowTag").text("标签："+arr[0].Tag);
-            $("#NowUrl").text("网址："+arr[0].URL);
-            $("#NowContent").text(arr[0].Content)
+
         },
         error: function () {
-            alert("未搜索到相关信息");
+            alert("搜索错误");
         }
     })
 }
@@ -137,7 +140,6 @@ function collection(){
         data : json,
         success: function (daa) {
             if(daa.signal=="SearchLike Success") {
-                alert("查询成功");
                 var arr = daa.jsonarray;
                 if (arr.length > 0){
                     $("tr").remove(".formData");
@@ -217,10 +219,10 @@ function formDataCollection(obj){
         data : json,
         success: function (daa) {
             var signal=daa.signal;
-            if(signal.equal("collect success")) {
+            if(signal=="collect success") {
                 alert("收藏成功！") ;
             }
-            else if(signal.equal("collected already!!")){
+            else if(signal=="collected already!!"){
                 alert("收藏过，无法重复收藏")
             }
         },
@@ -243,9 +245,9 @@ $(document).ready(function(){
         type:"post",
         success:function(daa){
             if(daa.signal=="User Informartion Success"){
-                $("#UserName").text(daa.Username);
-                $("#Username1").text(daa.Username);
-                $("#eamilInfo").text(daa.Useremail);
+                $("#UserName").html(daa.username);
+                $("#Username1").html(daa.username);
+                $("#eamilInfo").html(daa.useremail);
             }else if(daa.signal=="User Informartion Fail"){
                 alert("用户信息加载失败")
             }
@@ -256,7 +258,10 @@ $(document).ready(function(){
     })
 });
 //登陆后搜所有信息--------------------------------------------------------
-$(document).ready(function(){
+$(document).ready(
+    searchAll()
+);
+function searchAll(){
     var data={
         "demand":"DisplayAllInfo"
     };
@@ -290,7 +295,7 @@ $(document).ready(function(){
                 $("#NowPublishTime").text("发布时间："+arr[0].PublishDate);
                 $("#NowTag").text("标签："+arr[0].Tag);
                 $("#NowUrl").text("网址："+arr[0].URL);
-                $("#NowContent").text(arr[0].Content)
+                $("#NowContent").text("正文"+arr[0].Content)
             }else if(signal=="Output Fail"){
             }
         },
@@ -298,13 +303,12 @@ $(document).ready(function(){
             alert("数据信息后台未发包");
         }
     })
-});
+}
 //按输入信息查询------------------------------------------------------------
-$("#Search").click(
-    function(){
-        var searchInfo=("#SearchInfo").val();
+function searchByInfo(){
+    var searchKey=$("#SearchInfo").val();
         var data = {
-            "demand": searchInfo
+            "demand": searchKey
         };
         var json = JSON.stringify(data);
         $.ajax({
@@ -315,17 +319,16 @@ $("#Search").click(
             data: json,
             success: function (daa) {
                 $("tr").remove(".formData");
-                console.log("数据为", daa);
                 var arr = daa.jsonarray;
                 for (var i = 0; i < arr.length; i++) {
                     $("#Table").append("<tr id=\"FormData\" class=\"formData\">\n" +
-                        "                            <td style=\"width: 20%\">+arr[i].Title+</td>\n" +
-                        "                            <td style=\"width: 10%\">+arr[i].Tag+</td>\n" +
+                        "                            <td style=\"width: 20%\">"+arr[i].Title+"</td>\n" +
+                        "                            <td style=\"width: 10%\">"+arr[i].Tag+"</td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].ID+\" onclick=\"formDataView(this)\">查看</a>\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataView(this)\">查看</a>\n" +
                         "                            </td>\n" +
                         "                            <td style=\"width: 5%\">\n" +
-                        "                                <a id=\"+arr[i].ID+\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
+                        "                                <a id=\""+arr[i].ID+"\" onclick=\"formDataCollection(this)\">收藏</a>\n" +
                         "                            </td>\n" +
                         "                        </tr>"
                     )
@@ -335,14 +338,13 @@ $("#Search").click(
                 $("#NowPublishTime").text("发布时间："+arr[0].PulishDate);
                 $("#NowTag").text("标签："+arr[0].Tag);
                 $("#NowUrl").text("网址："+arr[0].URL);
-                $("#NowContent").text(arr[0].Content)
+                $("#NowContent").text("正文："+arr[0].Content)
             },
             error: function () {
                 alert("未搜索到相关信息");
             }
         })
     }
-);
 //退出登录-----------------------------------------------------------------------
 $("#Logout").click(
     function(){
