@@ -58,23 +58,23 @@ public class WashTest {
         }
 
         try {
-            IntelDao intelDao = new Intelseverce();
-
-            Calendar calendar = new Calendar.Builder().build();
-//            calendar.add(Calendar.DATE, );
-
-//            Intel intel = intelDao.findIntelBefore();
-
-            IntelTagInterface intelTagInterface = new TagImp();
-            List<Tag> list = intelTagInterface.getTagsOfIntel(intel);
-            System.out.println("-----------------------------");
-            for (Tag tag2 : list){
-                System.out.println(tag2.getTagName());
-            }
-
-            intelTagInterface.copyTagToData(data1,intel);
-        } catch (SQLException e) {
-            e.printStackTrace();
+//            IntelDao intelDao = new Intelseverce();
+//
+//            Calendar calendar = new Calendar.Builder().build();
+////            calendar.add(Calendar.DATE, );
+//
+////            Intel intel = intelDao.findIntelBefore();
+//
+//            IntelTagInterface intelTagInterface = new TagImp();
+//            List<Tag> list = intelTagInterface.getTagsOfIntel(intel);
+//            System.out.println("-----------------------------");
+//            for (Tag tag2 : list){
+//                System.out.println(tag2.getTagName());
+//            }
+//
+//            intelTagInterface.copyTagToData(data1,intel);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
