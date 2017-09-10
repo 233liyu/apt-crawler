@@ -36,8 +36,7 @@ public class LikeChangeServlet extends HttpServlet {
             JsonParser parser = new JsonParser();
             object = (JsonObject) parser.parse(data);
             LikeChange = object.get("LikeChange").getAsString();
-            UserID = object.get("UserID").getAsString();
-            user = dao1.findUserByID(UserID);
+            user =(SystemUser)request.getSession().getAttribute("user");
             DataID = object.get("DataID").getAsString();
         } catch (Exception e) {
             object.addProperty("signal", "Like Change Fail");
