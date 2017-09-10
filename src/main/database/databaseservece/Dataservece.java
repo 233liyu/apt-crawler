@@ -70,17 +70,17 @@ public class Dataservece implements DataInterface {
 
     @Override
     public List<Data> getDataByTag(String tag) throws SQLException {
-        //还没实现
         Dataconnect connect=new Dataconnect();
         ResultSet res = null;
         PreparedStatement sta=null;
+        Tag tag1=new TagImp().findByName(tag);
         List<Data> list=new ArrayList<>();
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="select * from data_info where id=?";
+            String sql="SELECT * FROM data_info WHERE id IN (SELECT data_key FROM data_tag_table WHERE tag_key = ?)";
             sta=con.prepareStatement(sql);
-            sta.setString(1,tag);
+            sta.setInt(1,Integer.parseInt(tag1.getTagID()));
             res=sta.executeQuery();
             list=finddata(res);
             System.out.println("查询成功");
@@ -183,7 +183,14 @@ public class Dataservece implements DataInterface {
     }
 
     @Override
-    public List<Data> searchDataByTag(Tag tag, String keyWord) {
+    public List<Data> searchDataByTag(Tag tag, String keyWord) throws SQLException {
+        List<Data> oldlist=new ArrayList<>();
+        List<Data> newlist=new ArrayList<>();
+        oldlist=getDataByTag(tag.getTagName());
+        for(int i=0;i<oldlist.size();i++)
+        {
+
+        }
 
         return null;
     }

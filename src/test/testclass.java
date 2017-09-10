@@ -19,15 +19,18 @@ public class testclass {
         DataInterface dataInterface=new Dataservece();
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.add(Calendar.DATE, -6);
+        cal.add(Calendar.DATE, +2);
         System.out.println(cal.getTime());
         List<Intel> list = intelDao.findIntelBefore(new java.sql.Date(cal.getTime().getTime()));
+//        List<Intel> list = intelDao.findIntelBefore(new java.sql.Date(cal.getTime().getTime()));
 //        List<Intel> list1 = intelDao.findIntelbetween(new java.sql.Date(cal.getTime().getTime()), new java.sql.Date(new Date().getTime()));
-        List<Data> list1 = dataInterface.getDataLimitBeforeDate(new java.sql.Date(cal.getTime().getTime()),2);
+//        List<Data> list1 = dataInterface.getDataLimitBeforeDate(new java.sql.Date(cal.getTime().getTime()),2);
+
+        List<Data> list1 = dataInterface.getDataByTag("this is name");
         System.out.println("----------------------------");
         if(list != null){
             for (Intel intel : list){
-                System.out.println(intel.getIntelID());
+                System.out.println(intel.getPublishDate());
             }
         } else {
             System.out.println("hahhahaha");
@@ -36,9 +39,9 @@ public class testclass {
 
         System.out.println("----------------------------");
 
-        if(list != null){
+        if(list1 != null){
             for (Data data : list1){
-                System.out.println(data.getPublishDate());
+                System.out.println(data.getContent());
             }
         } else {
             System.out.println("hahhahaha");
