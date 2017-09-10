@@ -25,10 +25,6 @@ public class SearchByDateServlet extends HttpServlet {
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
         try{
-
-            String data = UserregisterServlet.getBody(request);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
             DataInterface dao = new Dataservece();
             List<Data> a = dao.getDataLimitBeforeDate(now,10);
             int i = 0;
