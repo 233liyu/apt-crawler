@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 @WebServlet(name = "UserImformationServlet")
-public class UserImformationServlet extends HttpServlet {
+public class UserInformationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         JsonObject object =new JsonObject();
         Writer out =response.getWriter();
@@ -31,18 +31,29 @@ public class UserImformationServlet extends HttpServlet {
               user_email=user.getEmail();
          }catch (Exception e)
          {
-             object.addProperty("signal", "Session not find");
+             object.addProperty("signal", "Session Not Find");
              retString=object.toString();
              out.write(retString);
              out.flush();
              response.flushBuffer();
              return;
          }
-         object.addProperty("UserName",user_name);
-         object.addProperty("UserNassword",user_passwordd);
-         object.addProperty("UserID",user_ID);
-         object.addProperty("UserPower",user_power);
-         object.addProperty("UserPmail",user_email);
+         try {
+             object.addProperty("username", user_name);
+             object.addProperty("userpassword", user_passwordd);
+             object.addProperty("userID", user_ID);
+             object.addProperty("userpower", user_power);
+             object.addProperty("useremail", user_email);
+         }catch (Exception e)
+         {
+             object.addProperty("signal", "User Informartion Fail");
+             retString=object.toString();
+             out.write(retString);
+             out.flush();
+             response.flushBuffer();
+             return;
+         }
+        object.addProperty("signal", "User Informartion Success");
         retString=object.toString();
         out.write(retString);
         out.flush();
