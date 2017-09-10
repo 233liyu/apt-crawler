@@ -23,7 +23,6 @@ import java.io.Writer;
 public  class AddHistoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SystemUser user =new SystemUser();
-        Data now =new Data();
         String UserID =null;
         String DataID=null;
         String retString="";
@@ -41,7 +40,6 @@ public  class AddHistoryServlet extends HttpServlet {
             UserID = object.get("UserID").getAsString();
             user = dao1.findUserByID(UserID);
             DataID =object.get("DataID").getAsString();
-            now =dao2.getDataByID(DataID);
         }catch (Exception e) {
             object.addProperty("signal","Search User Fail");
             retString=object.toString();

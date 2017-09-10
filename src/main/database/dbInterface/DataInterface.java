@@ -32,6 +32,6 @@ public interface DataInterface {
 
     public List<Data> searchLike(SystemUser systemUser) throws SQLException;
 
-    public  void addLike(SystemUser systemUser,List<Data> data);
-    public  void deleteLike(SystemUser systemUser,List<Data> data);
+    public  void addLike(SystemUser systemUser,String DataID);
+    public  void deleteLike(SystemUser systemUser,String DataID);
 }
