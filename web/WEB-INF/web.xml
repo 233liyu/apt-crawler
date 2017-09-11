@@ -128,4 +128,20 @@
         <servlet-name>DataVisualization</servlet-name>
         <url-pattern>/data/word_cloud</url-pattern>
     </servlet-mapping>
+
+
+    <!--[=[====================================-->
+
+    <servlet>
+        <servlet-name>UserActionServlet</servlet-name>
+        <servlet-class>main.servlet.UserActionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserActionServlet</servlet-name>
+        <url-pattern>/user/action</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
+
