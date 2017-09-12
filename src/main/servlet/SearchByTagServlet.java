@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import main.Beans.Data;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,20 +26,19 @@ public class SearchByTagServlet extends HttpServlet {
         response.setContentType("application/json");
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
+        JsonArray array = new JsonArray();
         try {
-            String data = UserregisterServlet.getBody(request);
+            String data = JsonUtil.getPostBody(request);
             System.out.println(data);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
+            object = JsonUtil.String2Json(data);
             Tag = object.get("tag").getAsString();
         } catch (Exception e) {
 
-            object.addProperty("signal", "Search By Tag Fail");
-            retString = object.toString();
-            e.printStackTrace();
+            retString= JsonUtil.retDefaultJson(false,"search by tag fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
+            e.printStackTrace();
             return;
         }
 
@@ -49,7 +49,6 @@ public class SearchByTagServlet extends HttpServlet {
                 System.out.println("error, empty list a");
             }
             int i = 0;
-            JsonArray array = new JsonArray();
             for (Data ob : a) {
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
@@ -69,11 +68,14 @@ public class SearchByTagServlet extends HttpServlet {
             }
             object.add("jsonarray", array);
         } catch (Exception e) {
-            object.addProperty("signal", "Search By Tag Fail");
+            retString= JsonUtil.retDefaultJson(false,"search by tag fail",null,null);
+            out.write(retString);
+            out.flush();
+            response.flushBuffer();
             e.printStackTrace();
+            return;
         }
-        object.addProperty("signal", "Search By Tag success");
-        retString = object.toString();
+        retString= JsonUtil.retDefaultJson(true,"search by info success",null,array);
         out.write(retString);
         out.flush();
         response.flushBuffer();

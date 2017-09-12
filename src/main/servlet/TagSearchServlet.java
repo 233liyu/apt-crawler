@@ -9,6 +9,7 @@ import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.TagImp;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.DataTagInterface;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,17 +28,16 @@ public class TagSearchServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         Writer out = response.getWriter();
+        JsonArray array = new JsonArray();
         JsonObject object = new JsonObject();
         try {
-            String data = UserregisterServlet.getBody(request);
+            String data = JsonUtil.getPostBody(request);
             System.out.println(data);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
+            object = JsonUtil.String2Json(data);
             DataID = object.get("dataID").getAsString();
         } catch (Exception e) {
 
-            object.addProperty("signal", "Tag Search Fail");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(false,"tag search fail",null,null);
             e.printStackTrace();
             out.write(retString);
             out.flush();
@@ -55,7 +55,7 @@ public class TagSearchServlet extends HttpServlet {
             }
             int i = 0;
 
-            JsonArray array = new JsonArray();
+
             for (Tag ob : a) {
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
@@ -67,10 +67,14 @@ public class TagSearchServlet extends HttpServlet {
             }
             object.add("jsonarray", array);
         } catch (Exception e) {
-            object.addProperty("signal", "Tag Search Fail");
+            retString= JsonUtil.retDefaultJson(false,"tag search fail",null,null);
             e.printStackTrace();
+            out.write(retString);
+            out.flush();
+            response.flushBuffer();
+            return;
         }
-        object.addProperty("signal", "Tag Search Success");
+        retString= JsonUtil.retDefaultJson(true,"tag search success",null,array);
         retString = object.toString();
         out.write(retString);
         out.flush();

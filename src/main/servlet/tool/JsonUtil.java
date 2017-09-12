@@ -94,7 +94,6 @@ public class JsonUtil {
                 jsonObject.addProperty("category",tag.getTagCategory());
                 tag_array.add(jsonObject);
             }
-
         }
 
         object.add("tags",tag_array);

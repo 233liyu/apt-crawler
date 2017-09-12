@@ -10,6 +10,7 @@ import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataHistory;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.UserDao;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,16 +31,15 @@ public class SearchByInfoServlet extends HttpServlet {
         response.setContentType("application/json");
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
+        JsonArray array = new JsonArray();
         try {
-            String data = UserregisterServlet.getBody(request);
+            String data = JsonUtil.getPostBody(request);
             System.out.println(data);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
+            object = JsonUtil.String2Json(data);
             demand = object.get("demand").getAsString();
         } catch (Exception e) {
 
-            object.addProperty("signal", "Demand Fail");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(false,"search by info fail",null,null);
             e.printStackTrace();
             out.write(retString);
             out.flush();
@@ -53,10 +53,15 @@ public class SearchByInfoServlet extends HttpServlet {
 //            Data arr[] = a.toArray(new Data[a.size()]);
             if (a == null) {
                 System.out.println("error, empty list a");
+                retString= JsonUtil.retDefaultJson(false,"no such data","search fail",null);
+                out.write(retString);
+                out.flush();
+                response.flushBuffer();
+                return;
             }
             int i = 0;
-            object.addProperty("signal", "Demand success");
-            JsonArray array = new JsonArray();
+
+
             for (Data ob : a) {
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
@@ -74,12 +79,15 @@ public class SearchByInfoServlet extends HttpServlet {
                 array.add(object1);
                 i++;
             }
-            object.add("jsonarray", array);
         } catch (Exception e) {
-            object.addProperty("signal", "Demand Fail");
+            retString= JsonUtil.retDefaultJson(false,"search by info fail",null,null);
+            out.write(retString);
+            out.flush();
+            response.flushBuffer();
             e.printStackTrace();
+            return;
         }
-        retString = object.toString();
+        retString= JsonUtil.retDefaultJson(true,"search by info success",null,array);
         out.write(retString);
         out.flush();
         response.flushBuffer();

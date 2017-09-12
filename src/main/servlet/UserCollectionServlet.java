@@ -8,6 +8,7 @@ import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.UserDao;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,10 +31,11 @@ public class UserCollectionServlet extends HttpServlet {
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
         UserDao dao1 = new Userseverce();
+        JsonArray array  = new JsonArray();
         try {
             user = (SystemUser)request.getSession().getAttribute("user");
         }catch (Exception e) {
-            object.addProperty("signal","Search User Fail");
+            retString= JsonUtil.retDefaultJson(false,"not log in","Log in first please",null);
             retString=object.toString();
             out.write(retString);
             out.flush();
@@ -44,7 +46,6 @@ public class UserCollectionServlet extends HttpServlet {
             DataInterface dao=new Dataservece();
             List<Data> a = dao.searchLike(user);
             int i = 0;
-            JsonArray array  = new JsonArray();
             for (Data ob : a){
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
@@ -62,19 +63,15 @@ public class UserCollectionServlet extends HttpServlet {
                 array.add(object1);
                 i++;
             }
-            object.add("jsonarray",array);
         }catch(Exception e)
         {
-            object.addProperty("signal","SearchLike Fail");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(false,"user collection fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
             return;
         }
-        object.addProperty("signal","SearchLike Success");
-
-        retString = object.toString();
+        retString= JsonUtil.retDefaultJson(true,"user collection success",null,array);
         out.write(retString);
         out.flush();
         response.flushBuffer();

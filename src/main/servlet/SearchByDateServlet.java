@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import main.Beans.Data;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,6 +25,7 @@ public class SearchByDateServlet extends HttpServlet {
         response.setContentType("application/json");
         Writer out = response.getWriter();
         JsonObject object = new JsonObject();
+        JsonArray array  = new JsonArray();
         try{
             Calendar cal = Calendar.getInstance();
             cal.setTime(new Date());
@@ -33,7 +35,6 @@ public class SearchByDateServlet extends HttpServlet {
             DataInterface dao = new Dataservece();
             List<Data> a = dao.getDataLimitBeforeDate(cal.getTime(),10);
             int i = 0;
-            JsonArray array  = new JsonArray();
             for (Data ob : a){
                 JsonObject object1 = new JsonObject();
                 object1.addProperty("no", i);
@@ -54,16 +55,14 @@ public class SearchByDateServlet extends HttpServlet {
             object.add("jsonarray",array);
         }catch(Exception e)
         {
-            object.addProperty("signal","Output Fail");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(false,"search by date fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
             e.printStackTrace();
             return;
         }
-        object.addProperty("signal","Output Success");
-        retString = object.toString();
+        retString= JsonUtil.retDefaultJson(true,"search by date success",null,array);
         out.write(retString);
         out.flush();
         response.flushBuffer();

@@ -1,5 +1,6 @@
 package main.servlet;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import main.Beans.SystemUser;
@@ -7,6 +8,7 @@ import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataInterface;
 import main.database.dbInterface.UserDao;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,21 +32,21 @@ public class LikeChangeServlet extends HttpServlet {
         JsonObject object = new JsonObject();
         UserDao dao1 = new Userseverce();
         DataInterface dao2 = new Dataservece();
+        JsonArray array = new JsonArray();
         try {
 
-            String data = UserregisterServlet.getBody(request);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
+            String data = JsonUtil.getPostBody(request);
+            System.out.println(data);
+            object = JsonUtil.String2Json(data);
             LikeChange = object.get("LikeChange").getAsString();
-            UserID = object.get("UserID").getAsString();
-            user = dao1.findUserByID(UserID);
+            user=(SystemUser)request.getSession().getAttribute("user");
             DataID = object.get("DataTitle").getAsString();
         } catch (Exception e) {
-            object.addProperty("signal", "Like Change Fail");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(false,"not log in","Log in first please",null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
+            e.printStackTrace();
             return;
         }
         if (LikeChange.equals("AddLike")) {
@@ -52,15 +54,13 @@ public class LikeChangeServlet extends HttpServlet {
                 DataInterface dao =new Dataservece();
                dao.addLike(user, DataID);
             } catch (Exception e) {
-                object.addProperty("signal", "Add Like Fail");
-                retString = object.toString();
+                retString= JsonUtil.retDefaultJson(false,"add like fail",null,null);
                 out.write(retString);
                 out.flush();
                 response.flushBuffer();
                 return;
             }
-            object.addProperty("signal", "Add Like Success");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(true,"add like success",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
@@ -70,15 +70,13 @@ public class LikeChangeServlet extends HttpServlet {
                 DataInterface dao =new Dataservece();
                 dao.deleteLike(user, DataID);
             } catch (Exception e) {
-                object.addProperty("signal", "Delete Like Fail");
-                retString = object.toString();
+                retString= JsonUtil.retDefaultJson(false,"delete like fail",null,null);
                 out.write(retString);
                 out.flush();
                 response.flushBuffer();
                 return;
             }
-            object.addProperty("signal", "Delete Like Success");
-            retString = object.toString();
+            retString= JsonUtil.retDefaultJson(true,"delete like success",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
