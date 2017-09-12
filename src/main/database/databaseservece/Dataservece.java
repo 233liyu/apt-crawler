@@ -270,7 +270,7 @@ public class Dataservece implements DataInterface {
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="delete  from like_info where history_info.userid = ? and history_info.dataid=?";
+            String sql="delete  from like_info where like_info.userid = ? and like_info.dataid=?";
             sta=con.prepareStatement(sql);
             sta.setString(1,userID);
             sta.setString(2,DataID);
