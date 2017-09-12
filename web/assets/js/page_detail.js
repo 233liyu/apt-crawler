@@ -76,8 +76,10 @@ function render_page(json) {
     var like_btn = $('#like_bottom');
     like_btn.data('id', json.data_id);
     if(json.like){
+        like_btn.data('liked',true);
         like_btn.attr('style','color:red;');
     } else {
+        like_btn.data('liked',false);
         like_btn.attr('style','');
     }
 
@@ -89,7 +91,7 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
-function like_request(data_id,action) {
+function like_request(data_id,action,callback) {
     var json = {
         LikeChange : action,
         DataTitle : data_id
@@ -105,8 +107,7 @@ function like_request(data_id,action) {
             if(data.state){
                 // log in success
                 //{"user_name":"liyu","email":"sdf@ds.com"}
-                message('success', "收藏成功！");
-                $("#like_bottom").attr('style', 'color: red;');
+                callback();
             } else {
                 // error
                 if(data.errMsg == 'not log in'){
@@ -124,13 +125,31 @@ function like_request(data_id,action) {
     })
 }
 
+function like_add() {
+    message('success', "收藏成功！");
+    $("#like_bottom").attr('style', 'color: red;');
+    $("#like_bottom").data('liked',true);
+}
+
+function like_del() {
+    message('success', "已取消收藏！");
+    $("#like_bottom").attr('style', '');
+    $("#like_bottom").data('liked',false);
+
+}
+
 $(".ly_btn").click(
     function (click) {
         var btn = $(click.currentTarget);
         console.log(btn);
         if (btn.data('context') == 'like'){
-            like_request(btn.data('id'), 'AddLike');
-            message('success', "收藏成功！");
+
+            if (btn.data('liked')){
+                like_request(btn.data('id'), 'DeleteLike',like_del);
+            } else {
+                like_request(btn.data('id'), 'AddLike',like_add);
+            }
+            // message('success', "收藏成功！");
         } else {
             window.history.go(-1);
         }

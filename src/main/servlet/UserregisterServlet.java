@@ -89,7 +89,6 @@ public class UserregisterServlet extends HttpServlet {
         try{
             UserDao dao=new Userseverce();
             SystemUser user = new SystemUser();
-            apt_set.setob(user,user_name,user_password,user_mail);
             dao.CreateUser(user);
 //            TODO: jump to login
 //            HttpSession session = request.getSession();
