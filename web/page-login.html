@@ -15,10 +15,10 @@
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<link rel="stylesheet" href="assets/css/demo.css">
 	<!-- GOOGLE FONTS -->
+    <link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 
 </head>
 
@@ -58,13 +58,14 @@
 										<span>Remember me</span>
 									</label>
 								</div>
+                            </form>
 								<button id="log_in_button" onclick="user_action('login')" class="btn btn-primary btn-lg btn-block">LOGIN</button>
 								<button id="sign_up_button" onclick="user_action('sign_up')" class="btn btn-primary btn-lg btn-block">Sign up</button>
-								<div class="bottom">
+								<div style="margin-top: 10px" class="bottom">
 									<span id="sign_up_" class="helper-text"><a onclick="sign_up_switch('sign_up')">Sign Up?</a></span>
-									<span id="log_in_" class="helper-text"><a onclick="sign_up_switch('login')">Have Account Already?</a></span>
+									<span id="log_in_"  class="helper-text"><a onclick="sign_up_switch('login')">Have Account Already?</a></span>
 								</div>
-							</form>
+
 
 
 						</div>
@@ -83,6 +84,7 @@
 	</div>
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
 	<script src="assets/js/Login.js"></script>
+	<script src="assets/vendor/toastr/toastr.min.js"></script>
 	<script>
 		$(document).ready(
             sign_up_switch('login')

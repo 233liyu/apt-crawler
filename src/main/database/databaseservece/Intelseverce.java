@@ -40,9 +40,9 @@ public class Intelseverce implements IntelDao {
             con = connect.getConnection();
             String sql = "select * from Intelligence_info where id = ? ";
             sta = con.prepareStatement(sql);
-            //sta.setString(1, String.valueOf(ID));
+            sta.setString(1, String.valueOf(ID));
             res = sta.executeQuery();
-            System.out.println(sql);
+//            System.out.println(sql);
             list = findintel(res);
             System.out.println("查询成功");
         } catch (Exception e) {

@@ -101,6 +101,8 @@ public class WasherDataDao implements WasherData{
             sta.setInt(8,this.getSourceID(data.getSites()));
             sta.setString(9,data.getDataID());
 
+//            System.out.println(sta.toString());
+
             sta.execute();
 
         } catch (Exception e) {

@@ -5,11 +5,12 @@ import main.Beans.Intel;
 import main.Beans.Tag;
 import main.Computering.DataCal.wordCloud.wordCloudHandler;
 import main.Computering.MovingPart.MovingManager;
+import main.Computering.MovingPart.Tools.AntTool;
 import main.database.databaseservece.Dataservece;
+import main.database.databaseservece.Intelseverce;
 import main.database.databaseservece.TagImp;
-import main.database.dbInterface.DataInterface;
-import main.database.dbInterface.DataTagInterface;
-import main.database.dbInterface.IntelTagInterface;
+import main.database.databaseservece.WasherDataDao;
+import main.database.dbInterface.*;
 
 import java.sql.SQLException;
 import java.util.Calendar;
@@ -17,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AntTest {
-    public static void main(String args[]) throws SQLException {
+    public static void main(String args[]) throws Exception {
 //        DataInterface dao = new Dataservece();
 //
 //        Calendar cal = Calendar.getInstance();
@@ -40,9 +41,9 @@ public class AntTest {
 //        }
 
 
-
-        wordCloudHandler handler = new wordCloudHandler();
-        wordCloudHandler.toJsonArray(handler.getResult());
+//
+//        wordCloudHandler handler = new wordCloudHandler();
+//        wordCloudHandler.toJsonArray(handler.getResult());
 
         IntelTagInterface intelTagInterface = new TagImp();
         Intel intel = new Intel();
@@ -54,6 +55,14 @@ public class AntTest {
         }
         MovingManager manager = MovingManager.getInstance();
         manager.startThread();
+
+//        Intel data = new Intelseverce().findIntelByID(503);
+//        Data data1 = new Data();
+//        data1.setAuthor("李瑜");
+//        data.setContent("");
+//        System.out.println(data.Content);
+//        System.out.println(new String(data.Content.getBytes(),"utf-8"));
+//        AntTool.AddToData(data);
     }
 
 }

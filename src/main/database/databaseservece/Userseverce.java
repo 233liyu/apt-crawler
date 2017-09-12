@@ -133,7 +133,7 @@ public class Userseverce implements UserDao{
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="insert into user_info (username,password,email)VALUES ('"+username+"',MD5("+password+"),'"+email+"')";
+            String sql="insert into user_info (username,password,email)VALUES ('"+username+"',MD5('"+password+"'),'"+email+"')";
             sta=con.prepareStatement(sql);
             sta.execute();
             System.out.println("查询成功");

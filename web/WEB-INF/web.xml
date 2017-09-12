@@ -140,6 +140,24 @@
         <servlet-name>UserActionServlet</servlet-name>
         <url-pattern>/user/action</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>UserInfo</servlet-name>
+        <servlet-class>main.servlet.UserInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserInfo</servlet-name>
+        <url-pattern>/user/info</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DataServlet</servlet-name>
+        <servlet-class>main.servlet.DataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataServlet</servlet-name>
+        <url-pattern>/get/data</url-pattern>
+    </servlet-mapping>
 
 
 
