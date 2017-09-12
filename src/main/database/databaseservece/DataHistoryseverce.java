@@ -43,7 +43,7 @@ public class DataHistoryseverce implements DataHistory{
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="insert into  history_info set userid = ? ,dataid = ?,time=TIMESTAMP(now()); ";
+            String sql="insert into  history_info set userid = ? ,dataid = ?,crawtime=TIMESTAMP(now()); ";
             sta=con.prepareStatement(sql);
             sta.setString(1,id);
             sta.setString(2,dataID);
