@@ -1,7 +1,7 @@
 package  main.servlet;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import main.Beans.Data;
+import main.servlet.tool.JsonUtil;
 import main.Beans.SystemUser;
 import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.Userseverce;
@@ -34,14 +34,12 @@ public  class AddHistoryServlet extends HttpServlet {
         DataInterface dao2=new Dataservece();
         try {
 
-            String data = UserregisterServlet.getBody(request);
-            JsonParser parser = new JsonParser();
-            object = (JsonObject) parser.parse(data);
+            String data = JsonUtil.getPostBody(request);
+            object = JsonUtil.String2Json(data);
             user = (SystemUser)request.getSession().getAttribute("user");
             DataID =object.get("DataID").getAsString();
         }catch (Exception e) {
-            object.addProperty("signal","Search User Fail");
-            retString=object.toString();
+            retString=JsonUtil.retDefaultJson(false,"not log in","Log in first please",null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
@@ -52,15 +50,13 @@ public  class AddHistoryServlet extends HttpServlet {
             History.AddHistory(user,DataID);
         }catch (Exception e)
         {
-            object.addProperty("signal","Search User Fail");
-            retString=object.toString();
+            retString=JsonUtil.retDefaultJson(false,"add history fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
             return;
         }
-        object.addProperty("signal","Search User Success");
-        retString=object.toString();
+        retString=JsonUtil.retDefaultJson(true,"add history sucess",null,null);
         out.write(retString);
         out.flush();
         response.flushBuffer();

@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import main.Beans.Data;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
+import main.servlet.tool.JsonUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,8 +46,7 @@ public class DataInformationServlet extends HttpServlet {
             data_url=a.getURL();
         }catch (Exception e)
         {
-            object.addProperty("signal", "Data Not Find");
-            retString=object.toString();
+            retString= JsonUtil.retDefaultJson(false,"data information fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
@@ -62,15 +62,13 @@ public class DataInformationServlet extends HttpServlet {
             object.addProperty("dataUrl", data_url);
         }catch (Exception e)
         {
-            object.addProperty("signal", "Session Not Find");
-            retString=object.toString();
+            retString= JsonUtil.retDefaultJson(false,"data information fail",null,null);
             out.write(retString);
             out.flush();
             response.flushBuffer();
             return;
         }
-        object.addProperty("signal", "Session Find");
-        retString=object.toString();
+        retString= JsonUtil.retDefaultJson(true,"data information success",null,object);
         out.write(retString);
         out.flush();
         response.flushBuffer();
