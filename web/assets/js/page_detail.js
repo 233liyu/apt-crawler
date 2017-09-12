@@ -89,13 +89,52 @@ function getURLParameter(name) {
     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
 }
 
+function like_request(data_id,action) {
+    var json = {
+        LikeChange : action,
+        DataTitle : data_id
+    };
+    $.ajax({
+        url : '/apt/like/change',
+        type: "POST",
+        contentType: 'application/json; charset=utf-8', // 很重要
+        dataType: "json",
+        data : JSON.stringify(json),
+        success : function (data) {
+            console.log(data);
+            if(data.state){
+                // log in success
+                //{"user_name":"liyu","email":"sdf@ds.com"}
+                message('success', "收藏成功！");
+                $("#like_bottom").attr('style', 'color: red;');
+            } else {
+                // error
+                if(data.errMsg == 'not log in'){
+                    message('error','您还未登录！');
+                    // location.replace('/apt/page-login.html')
+                } else {
+                    message('error','服务器内部错误');
+                }
+            }
+        },
+        error : function () {
+            console.log('error network');
+            message('error','通信错误！')
+        }
+    })
+}
+
 $(".ly_btn").click(
     function (click) {
-        var btn = click.target();
+        var btn = $(click.currentTarget);
+        console.log(btn);
         if (btn.data('context') == 'like'){
-
+            like_request(btn.data('id'), 'AddLike');
+            message('success', "收藏成功！");
+        } else {
+            window.history.go(-1);
         }
-        console.log(click);
-        message('info','click');
+        // console.log(click);
+        // message('info','click');
     }
 );

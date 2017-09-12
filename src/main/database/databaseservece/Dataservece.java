@@ -216,7 +216,7 @@ public class Dataservece implements DataInterface {
         try {
             Connection con=null;
             con=connect.getConnection();
-            String sql="select * from data_info where like_info.userid=? and data_info.id=like_info.dataid";
+            String sql="select * from like_info where like_info.userid = ?; ";
             sta=con.prepareStatement(sql);
             sta.setString(1,String.valueOf(id));
             res=sta.executeQuery();
