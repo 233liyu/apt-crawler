@@ -158,8 +158,15 @@
         <servlet-name>DataServlet</servlet-name>
         <url-pattern>/get/data</url-pattern>
     </servlet-mapping>
-
-
+    
+    <servlet>
+        <servlet-name>DataOffset</servlet-name>
+        <servlet-class>main.servlet.getDataOffsetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DataOffset</servlet-name>
+        <url-pattern>/get/data/offset</url-pattern>
+    </servlet-mapping>
 
 </web-app>
 

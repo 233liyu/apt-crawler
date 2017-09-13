@@ -151,7 +151,8 @@ $(".ly_btn").click(
             }
             // message('success', "收藏成功！");
         } else {
-            window.history.go(-1);
+            // window.history.go(-1);
+            location.replace('/apt');
         }
         // console.log(click);
         // message('info','click');

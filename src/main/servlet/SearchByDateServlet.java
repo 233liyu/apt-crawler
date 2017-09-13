@@ -3,6 +3,7 @@ package main.servlet;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import main.Beans.Data;
+import main.Beans.Tag;
 import main.database.databaseservece.Dataservece;
 import main.database.dbInterface.DataInterface;
 import main.servlet.tool.JsonUtil;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,23 +36,9 @@ public class SearchByDateServlet extends HttpServlet {
 
             DataInterface dao = new Dataservece();
             List<Data> a = dao.getDataLimitBeforeDate(cal.getTime(),10);
-            int i = 0;
+
             for (Data ob : a){
-                JsonObject object1 = new JsonObject();
-                object1.addProperty("no", i);
-                object1.addProperty("ID", ob.getDataID());
-                object1.addProperty("Author", ob.getAuthor());
-                object1.addProperty("Content", ob.getContent());
-                object1.addProperty("Sites", ob.getSites());
-                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object1.addProperty("Title", ob.getTitle());
-                object1.addProperty("URL", ob.getURL());
-                String PublishDate =ob.getPublishDate().toString();
-                String CrawlDate =ob.getCrawlDate().toString();
-                object1.addProperty("PublishDate",PublishDate);
-                object1.addProperty("CrawlDate",CrawlDate);
-                array.add(object1);
-                i++;
+                array.add(JsonUtil.Data2Json(ob,new ArrayList<Tag>()));
             }
             object.add("jsonarray",array);
         }catch(Exception e)

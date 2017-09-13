@@ -6,9 +6,11 @@ import com.google.gson.JsonParser;
 import main.Beans.Data;
 import main.Beans.SystemUser;
 import main.database.databaseservece.Dataservece;
+import main.database.databaseservece.TagImp;
 import main.database.databaseservece.Userseverce;
 import main.database.dbInterface.DataHistory;
 import main.database.dbInterface.DataInterface;
+import main.database.dbInterface.DataTagInterface;
 import main.database.dbInterface.UserDao;
 import main.servlet.tool.JsonUtil;
 
@@ -62,22 +64,10 @@ public class SearchByInfoServlet extends HttpServlet {
             int i = 0;
 
 
+            DataTagInterface dataTagInterface = new TagImp();
             for (Data ob : a) {
-                JsonObject object1 = new JsonObject();
-                object1.addProperty("no", i);
-                object1.addProperty("ID", ob.getDataID());
-                object1.addProperty("Author", ob.getAuthor());
-                object1.addProperty("Content", ob.getContent());
-                object1.addProperty("Sites", ob.getSites());
-                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object1.addProperty("Title", ob.getTitle());
-                object1.addProperty("URL", ob.getURL());
-                String PublishDate = ob.getPublishDate().toString();
-                String CrawlDate = ob.getCrawlDate().toString();
-                object1.addProperty("PublishDate", PublishDate);
-                object1.addProperty("CrawlDate", CrawlDate);
-                array.add(object1);
-                i++;
+                JsonObject jsonObject = JsonUtil.Data2Json(ob, dataTagInterface.getTagsOfData(ob));
+                array.add(jsonObject);
             }
         } catch (Exception e) {
             retString= JsonUtil.retDefaultJson(false,"search by info fail",null,null);

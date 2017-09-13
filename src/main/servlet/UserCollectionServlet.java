@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserCollectionServlet")
@@ -47,21 +48,7 @@ public class UserCollectionServlet extends HttpServlet {
             List<Data> a = dao.searchLike(user);
             int i = 0;
             for (Data ob : a){
-                JsonObject object1 = new JsonObject();
-                object1.addProperty("no", i);
-                object1.addProperty("ID", ob.getDataID());
-                object1.addProperty("Author", ob.getAuthor());
-                object1.addProperty("Content", ob.getContent());
-                object1.addProperty("Sites", ob.getSites());
-                object1.addProperty("SourceIntelID", ob.getSourceIntelID());
-                object1.addProperty("Title", ob.getTitle());
-                object1.addProperty("URL", ob.getURL());
-                String PublishDate =ob.getPublishDate().toString();
-                String CrawlDate =ob.getCrawlDate().toString();
-                object1.addProperty("PublishDate",PublishDate);
-                object1.addProperty("CrawlDate",CrawlDate);
-                array.add(object1);
-                i++;
+                array.add(JsonUtil.Data2Json(ob, new ArrayList<>()));
             }
         }catch(Exception e)
         {
