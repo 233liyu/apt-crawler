@@ -4,8 +4,9 @@ $(document).ready(
         var json={"signal":"InfoOfCollection"};
         $.ajax({
             url:"/apt/homepage/usercollection",
+            contentType: 'application/json; charset=utf-8', // 很重要
             data:JSON.stringify(json),
-            type:"get",
+            type:"POST",
             dataType:"json",
             success:function(data){
                 console.log(data);

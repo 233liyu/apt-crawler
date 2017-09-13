@@ -12,8 +12,8 @@ function get_update() {
     var end = start + 10;
     end = parseInt(end);
     request_apt(start, end, apt_render);
-    start++;
-    sessionStorage.setItem('apt_start', start);
+    end++;
+    sessionStorage.setItem('apt_start', end);
 }
 
 function go_to_view(String) {

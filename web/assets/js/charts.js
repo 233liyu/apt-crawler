@@ -88,11 +88,11 @@ function pie_draw() {
                 radius : '55%',
                 center: ['50%', '50%'],
                 data:[
-                    {value:335, name:'直接访问'},
-                    {value:310, name:'邮件营销'},
-                    {value:274, name:'联盟广告'},
-                    {value:235, name:'视频广告'},
-                    {value:400, name:'搜索引擎'}
+                    // {value:335, name:'主题爬虫'},
+                    {value:21, name:'https://www.fireeye.com'},
+                    {value:84, name:'https://x.threatbook.cn'},
+                    {value:101, name:'http://www.freebuf.com'},
+                    {value:497, name:'https://securelist.com'}
                 ].sort(function (a, b) { return a.value - b.value; }),
                 roseType: 'radius',
                 label: {
@@ -149,4 +149,47 @@ function request_data(call_toDraw) {
             draw(daa.data);
         }
     })
+}
+
+function line_chart() {
+    var chart = echarts.init(document.getElementById('line_chart'));
+
+    option = {
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['爬取数据']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['2017-09-08','2017-09-09','2017-09-10','2017-09-11','2017-09-12','2017-09-13','2017-09-14']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name:'爬取数量',
+                type:'line',
+                stack: '总量',
+                data:[0, 128, 304, 0, 154, 22, 0]
+            }
+        ]
+    };
+    chart.setOption(option);
+
+    window.onresize = chart.resize;
 }

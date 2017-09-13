@@ -119,8 +119,8 @@ function get_daily() {
     message('info', '获取中');
     var end = start + 10;
     get_data_offset(start, end, daily_render);
-    start++;
-    sessionStorage.setItem('home_start', start);
+    end++;
+    sessionStorage.setItem('home_start', end);
 }
 
 
