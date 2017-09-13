@@ -152,34 +152,34 @@
 									<h3 class="panel-title">Bar Chart</h3>
 								</div>
 								<div class="panel-body no-padding">
-									<div style="min-height: 300px; width: 100%" id="" class="ct-chart"></div>
+									<div style="min-height: 300px; width: 100%" id="line_chart" class="ct-chart"></div>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Area Chart</h3>
-								</div>
-								<div class="panel-body">
-									<div id="demo-area-chart" class="ct-chart"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Multiple Chart</h3>
-								</div>
-								<div class="panel-body">
-									<div id="multiple-chart" class="ct-chart"></div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<!--<div class="row">-->
+						<!--<div class="col-md-6">-->
+							<!--<div class="panel">-->
+								<!--<div class="panel-heading">-->
+									<!--<h3 class="panel-title">Area Chart</h3>-->
+								<!--</div>-->
+								<!--<div class="panel-body">-->
+									<!--<div id="demo-area-chart" class="ct-chart"></div>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-md-6">-->
+							<!--<div class="panel">-->
+								<!--<div class="panel-heading">-->
+									<!--<h3 class="panel-title">Multiple Chart</h3>-->
+								<!--</div>-->
+								<!--<div class="panel-body">-->
+									<!--<div id="multiple-chart" class="ct-chart"></div>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
@@ -188,7 +188,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+				<!--<p class="copyright">&copy; 2017 <a href="#" target="_blank">Theme I Need</a>. All Rights Reserved. More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>-->
 			</div>
 		</footer>
 	</div>
@@ -205,7 +205,9 @@
 
     <script>
 	$(function() {
-		var options;
+	    getWords();
+	    pie_draw();
+	    line_chart();
 
 	});
 	</script>

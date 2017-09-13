@@ -186,5 +186,28 @@
         <url-pattern>/get/apt</url-pattern>
     </servlet-mapping>
 
+
+    <servlet>
+        <servlet-name>home_data</servlet-name>
+        <servlet-class>main.servlet.homeDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>home_data</servlet-name>
+        <url-pattern>/home/data</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>pie_chart</servlet-name>
+        <servlet-class>main.servlet.pieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>pie_chart</servlet-name>
+        <url-pattern>/charts/pie</url-pattern>
+    </servlet-mapping>
+
+
+
+
 </web-app>
 
