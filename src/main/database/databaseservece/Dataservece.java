@@ -75,14 +75,13 @@ public class Dataservece implements DataInterface {
         Dataconnect connect=new Dataconnect();
         ResultSet res = null;
         PreparedStatement sta=null;
-        Tag tag1=new TagImp().findByName(tag);
-        List<Data> list=new ArrayList<>();
+        List<Data> list = new ArrayList<>();
         try {
             Connection con=null;
             con=connect.getConnection();
             String sql="SELECT * FROM data_info WHERE id IN (SELECT data_key FROM data_tag_table WHERE tag_key = ?)";
             sta=con.prepareStatement(sql);
-            sta.setInt(1,Integer.parseInt(tag1.getTagID()));
+            sta.setInt(1,Integer.parseInt(tag));
             res=sta.executeQuery();
             list=finddata(res);
             System.out.println("查询成功");

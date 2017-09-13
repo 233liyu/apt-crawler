@@ -66,4 +66,8 @@ public class SystemUser {
     public void setID(String ID) {
         this.ID = ID;
     }
+
+    public boolean isAdmin(){
+        return power >= 10;
+    }
 }

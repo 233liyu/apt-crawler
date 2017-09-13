@@ -88,7 +88,6 @@ function toDetail(target) {
 }
 
 
-
 function daily_render(array) {
     var news_container = $("#daily_news_start");
     for (var i = 0; i < array.length; i++) {

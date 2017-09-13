@@ -34,6 +34,7 @@ public class UserInfoServlet extends HttpServlet {
                 JsonObject object = new JsonObject();
                 object.addProperty("user_name", user.getUserName());
                 object.addProperty("email", user.getEmail());
+                object.addProperty("power",user.isAdmin());
 
                 retString = JsonUtil.retDefaultJson(true,"success", "", object);
             }
