@@ -168,5 +168,14 @@
         <url-pattern>/get/data/offset</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchByTag</servlet-name>
+        <servlet-class>main.servlet.SearchByTagServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchByTag</servlet-name>
+        <url-pattern>/search/tag</url-pattern>
+    </servlet-mapping>
+
 </web-app>
 
