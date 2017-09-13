@@ -176,6 +176,15 @@
         <servlet-name>SearchByTag</servlet-name>
         <url-pattern>/search/tag</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>apt_get</servlet-name>
+        <servlet-class>main.servlet.AptGetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>apt_get</servlet-name>
+        <url-pattern>/get/apt</url-pattern>
+    </servlet-mapping>
 
 </web-app>
 

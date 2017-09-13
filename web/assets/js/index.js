@@ -107,12 +107,13 @@ function daily_render(array) {
 
 
 function get_daily() {
-    var start = 0;
+    var start = parseInt(0);
+
     var tem = sessionStorage.getItem('home_start');
     if (tem == null || tem == 'NaN') {
         sessionStorage.setItem('home_start', 0);
     } else {
-        start = tem;
+        start = parseInt(tem);
     }
 
     message('info', '获取中');

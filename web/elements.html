@@ -10,6 +10,9 @@
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+	<link rel="stylesheet" href="assets/vendor/toastr/toastr.min.css">
+	<link rel="stylesheet" href="assets/css/ly_css.css">
+
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="assets/css/main.css">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -119,116 +122,24 @@
 				<div class="container-fluid">
 					<h3 class="page-title">主题爬虫</h3>
 					<div class="row">
-						<div class="col-md-4 col-sm-12 col-lg-2">
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
+						<div class="col-md-6 col-sm-12 col-lg-4" id="ly_apt_container">
 
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
 
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
-							<div class="panel">
-								<div class="panel-heading">
-									<h1 class="panel-title">h11</h1>
-								</div>
-
-								<div class="panel-body">
-									<p><a >www.baidu.com</a></p>
-								</div>
-
-							</div>
 						</div>
 
-						<div class="col-md-8 col-lg-10 col-sm-0">
+						<div class="col-md-6 col-lg-8 col-sm-0">
 							<div class="panel" style="position: absolute; width: 100%;" id="win_frame">
 								<div class="panel-body no-padding">
-									<iframe style="min-height: 500px" frameborder="0" width="100%" src="http://www.baidu.com">
+									<iframe id="ly_monitor" style="min-height: 500px" frameborder="0" width="100%" src="http://www.baidu.com">
 
 									</iframe>
 								</div>
 							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="container-fluid">
+							<button onclick="get_update()" class="btn-bottom btn">View More</button>
 						</div>
 					</div>
 
@@ -553,7 +464,10 @@
 	<script src="assets/vendor/jquery/jquery.min.js"></script>
 	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/vendor/toastr/toastr.min.js"></script>
 	<script src="assets/scripts/klorofil-common.js"></script>
+	<script src="assets/js/index.js"></script>
+	<script src="assets/js/apt_page.js"></script>
 	<script>
 		$(document).ready(function(){
 			var menuYloc = $("#win_frame").offset().top;
@@ -562,6 +476,11 @@
 				$("#win_frame").animate({top : offsetTop },{ duration:20 , queue:false });
 			});
 		});
+
+		$(document).ready(
+		    get_update()
+//		    $("#win_frame").hide()
+		)
 	</script>
 </body>
 
