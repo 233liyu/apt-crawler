@@ -174,5 +174,6 @@ public class WasherDataDao implements WasherData{
                 e.printStackTrace();
             }
         }
+        return map;
     }
 }
