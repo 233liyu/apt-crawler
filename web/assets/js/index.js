@@ -33,7 +33,7 @@ function getUserInfo() {
                 //{"user_name":"liyu","email":"sdf@ds.com"}
                 var user = data.element;
                 $("#user_name").html(user.user_name);
-                sessionStorage.setItem('user_info', user);
+                sessionStorage.setItem('user_info', JSON.stringify(user));
                 console.log('log in success');
             } else {
                 // error

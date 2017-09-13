@@ -37,7 +37,7 @@ function user_action(ac) {
                 return
             }
 
-            user_request(sign_up_success(),sign_up_fail(),'sign_up');
+            user_request(sign_up_success,sign_up_fail,'sign_up');
 
             break;
         case 'login':

@@ -6,6 +6,8 @@ import main.database.databaseconnect.WashingConnect;
 import main.database.dbInterface.WasherData;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class WasherDataDao implements WasherData{
@@ -134,6 +136,37 @@ public class WasherDataDao implements WasherData{
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("123");
+        } finally {
+            try {
+                sta.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static Map<String, Integer> getPortion(){
+        Map<String, Integer> map = new HashMap<>();
+        PreparedStatement sta = null;
+        try {
+            WashingConnect washingConnect = WashingConnect.getInstance();
+            Connection connection = washingConnect.getConn();
+
+            String array [] = {"主题爬虫","https://www.fireeye.com", "https://x.threatbook.cn", "http://www.freebuf.com", "https://securelist.com"};
+
+            for (int i = 1 ; i < 5 ; i++){
+                String sql = "select COUNT(*) as os from data_info where sourceid = ?;";
+                sta = connection.prepareStatement(sql);
+                sta.setInt(1,i);
+                ResultSet resultSet = sta.executeQuery();
+                int li = resultSet.getInt("os");
+                map.put(array[i],li);
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 sta.close();

@@ -69,7 +69,10 @@ public class JsonUtil {
     }
 
     public static String toDateFormat(Date date){
-        Format format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        if (date == null){
+            return "未知时间";
+        }
+        Format format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
 

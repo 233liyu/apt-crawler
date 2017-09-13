@@ -1,20 +1,20 @@
 package test;
 
-import main.Beans.Data;
+
 import main.Beans.Intel;
 import main.Beans.Tag;
-import main.Computering.DataCal.wordCloud.wordCloudHandler;
 import main.Computering.MovingPart.MovingManager;
 import main.Computering.MovingPart.Tools.AntTool;
-import main.database.databaseservece.Dataservece;
 import main.database.databaseservece.Intelseverce;
 import main.database.databaseservece.TagImp;
-import main.database.databaseservece.WasherDataDao;
-import main.database.dbInterface.*;
+import main.database.dbInterface.DataTagInterface;
+import main.database.dbInterface.IntelDao;
+import main.database.dbInterface.IntelTagInterface;
+import main.servlet.tool.JsonUtil;
 
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AntTest {
@@ -45,14 +45,29 @@ public class AntTest {
 //        wordCloudHandler handler = new wordCloudHandler();
 //        wordCloudHandler.toJsonArray(handler.getResult());
 
-        IntelTagInterface intelTagInterface = new TagImp();
-        Intel intel = new Intel();
-        intel.setIntelID("494");
-        List<Tag>list = intelTagInterface.getTagsOfIntel(intel);
+//        IntelTagInterface intelTagInterface = new TagImp();
+//        Intel intel = new Intel();
+//        intel.setIntelID("494");
+//        List<Tag>list = intelTagInterface.getTagsOfIntel(intel);
+//
+//        for (Tag tag : list){
+//            System.out.println(tag.getTagName());
+//        }
 
-        for (Tag tag : list){
-            System.out.println(tag.getTagName());
-        }
+
+//        IntelDao dao = new Intelseverce();
+//        List<Intel> list = dao.findIntelBefore(new Date(0));
+//        System.out.println(list.size());
+//
+//
+//        IntelTagInterface intelTagInterface = new TagImp();
+//        DataTagInterface dataTagInterface = new TagImp();
+//        for (Intel intel : list){
+////            List<Tag> list1 = intelTagInterface.getTagsOfIntel(intel);
+//            AntTool.AddToData(intel);
+//            System.out.println(intel.getIntelID());
+//        }
+
         MovingManager manager = MovingManager.getInstance();
         manager.startThread();
 
@@ -64,5 +79,7 @@ public class AntTest {
 //        System.out.println(new String(data.Content.getBytes(),"utf-8"));
 //        AntTool.AddToData(data);
     }
+
+
 
 }
