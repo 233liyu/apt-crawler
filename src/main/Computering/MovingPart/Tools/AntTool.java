@@ -62,11 +62,26 @@ public class AntTool {
             e.printStackTrace();
         }
 
+        intel.Author = htmlSafeReplace(intel.URL);
+
         try {
             intelTagInterface.copyTagToData(data,intel);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static String htmlSafeReplace(String str){
+        str = str.replace("“", "&ldquo;");
+        str = str.replace("”", "&rdquo;");
+        str = str.replace(" ", "&nbsp;");
+        str = str.replace("&", "&amp;");
+        str = str.replace("'", "&#39;");
+        str = str.replace("’", "&rsquo;");
+        str = str.replace("—", "&mdash;");
+        str = str.replace("–", "&ndash;");
+        return str;
     }
 
 }
